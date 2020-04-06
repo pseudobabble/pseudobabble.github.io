@@ -25,9 +25,7 @@ The synopsis is as follows:
    - `git checkout -b dev`
 7. Configure your site with Pelican
    - `pelican-quickstart`
-
    - You should see the following output, line by line:
-
 ```
 Welcome to pelican-quickstart v3.7.1.
 
