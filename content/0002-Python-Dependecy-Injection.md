@@ -1,6 +1,7 @@
 title: Dependency Injection in Python
 date: 2020-04-06
 author: Harry
+category: development
 
 # Dependency Injection in Python
 

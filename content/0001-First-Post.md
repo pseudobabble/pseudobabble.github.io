@@ -1,6 +1,7 @@
 title: First Post - Getting Set Up with Pelican
 date: 2020-04-06
 author: Harry
+category: development
 
 # Getting started with Python and Pelican for Github Pages
 
