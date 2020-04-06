@@ -11,22 +11,22 @@ I've used python3 here.
 The synopsis is as follows:
 
 1. Create a virtual environment
-`virtualenv -p python3 your-venv-name`
+   - `virtualenv -p python3 your-venv-name`
 2. Activate the virtualenv
-`source your-venv-name/bin/activate`
+   - `source your-venv-name/bin/activate`
 3. Install the required packages
-`pip install pelican ghp-import Markdown`
+   - `pip install pelican ghp-import Markdown`
 4. Create the repo which will be used for your site
-Assuming you already have a Github account, create a new repository named `your-username.github.io`. This is where the files associated with your site will be stored.
+   - Assuming you already have a Github account, create a new repository named `your-username.github.io`. This is where the files associated with your site will be stored.
 5. Clone your repo and move into it
-`git clone your-repo-url && cd your-username.github.io`
+   - `git clone your-repo-url && cd your-username.github.io`
 6. Separate your sites metadata
-Erik (the author of the guide I followed) has a useful technique to separate your sites metadata (config files, etc) from the content. You commit the metadata to a separate branch (which I've named `dev`), and use `ghp-import` to commit the content to `master`.
-`git checkout -b dev`
+   - Erik (the author of the guide I followed) has a useful technique to separate your sites metadata (config files, etc) from the content. You commit the metadata to a separate branch (which I've named `dev`), and use `ghp-import` to commit the content to `master`.
+   - `git checkout -b dev`
 7. Configure your site with Pelican
-`pelican-quickstart`
+   - `pelican-quickstart`
 
-You should see the following output, line by line:
+   - You should see the following output, line by line:
 
 ```
 Welcome to pelican-quickstart v3.7.1.
@@ -101,16 +101,16 @@ Something about yourself here
 
 10. Publish
 
-Have Pelican generate the content:
+    - Have Pelican generate the content:
 `pelican content -o output -s publishconf.py`
 
-Use ghp-import to commit it to master
+    - Use ghp-import to commit it to master
 `ghp-import -m "your-commit-message" --no-jekyll -b master output`
 
-Push master
+    - Push master
 `git push origin master`
 
-Commit and push the new content to `dev`
+    - Commit and push the new content to `dev`
 ```
 git add content
 git commit -m 'your-commit-message'
