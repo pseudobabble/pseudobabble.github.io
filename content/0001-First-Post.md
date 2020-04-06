@@ -11,20 +11,20 @@ I've used python3 here.
 The synopsis is as follows:
 
 1. Create a virtual environment
-   - `virtualenv -p python3 your-venv-name`
+```virtualenv -p python3 your-venv-name```
 2. Activate the virtualenv
-   - `source your-venv-name/bin/activate`
+```source your-venv-name/bin/activate```
 3. Install the required packages
-   - `pip install pelican ghp-import Markdown`
+```pip install pelican ghp-import Markdown```
 4. Create the repo which will be used for your site
-   - Assuming you already have a Github account, create a new repository named `your-username.github.io`. This is where the files associated with your site will be stored.
+Assuming you already have a Github account, create a new repository named `your-username.github.io`. This is where the files associated with your site will be stored.
 5. Clone your repo and move into it
-   - `git clone your-repo-url && cd your-username.github.io`
+```git clone your-repo-url && cd your-username.github.io```
 6. Separate your sites metadata
-   - Erik (the author of the guide I followed) has a useful technique to separate your sites metadata (config files, etc) from the content. You commit the metadata to a separate branch (which I've named `dev`), and use `ghp-import` to commit the content to `master`.
-   - `git checkout -b dev`
+Erik (the author of the guide I followed) has a useful technique to separate your sites metadata (config files, etc) from the content. You commit the metadata to a separate branch (which I've named `dev`), and use `ghp-import` to commit the content to `master`.
+```git checkout -b dev```
 7. Configure your site with Pelican
-   - `pelican-quickstart`
+```pelican-quickstart```
    - You should see the following output, line by line:
 ```
 Welcome to pelican-quickstart v3.7.1.
@@ -53,7 +53,6 @@ needed by Pelican.
 > Is this your personal page (username.github.io)? (y/N) y
 Done. Your new project is available at /Users/username/blog
 ```
-
 8. Commit your `dev` metadata, but first, remember to create a `.gitignore' file to avoid commiting the whole `venv` folder:
 ```
 touch .gitignore && echo "venv" >> .gitignore
@@ -61,7 +60,6 @@ git add .
 git commit -m "your-commit-message"
 git push origin	dev
 ```
-
 9. Create some content for your site
 ```
 cd content
@@ -70,7 +68,6 @@ cp ~/Pictures/my-test-image.png images
 touch 01-My-First-Post.md
 touch pages/My-About-Page.md
 ```
-
 Open up the `01-My-First-Post.md` file and enter the following:
 ```
 title: My First Post
@@ -81,7 +78,6 @@ author: your-name
 
 Some content blah blah blah
 ```
-
 The first three lines (beginning `title: `) are part of Pelican's metadata. There are more available, check the docs.
 
 Now open the `pages/My-About-Page.md` file and enter the following:
@@ -96,26 +92,21 @@ Something about yourself here
 
 [my_picture]: {static}/images/my-test-image.png
 ```
-
 10. Publish
-
     - Have Pelican generate the content:
-`pelican content -o output -s publishconf.py`
-
+```pelican content -o output -s publishconf.py```
     - Use ghp-import to commit it to master
-`ghp-import -m "your-commit-message" --no-jekyll -b master output`
-
+```ghp-import -m "your-commit-message" --no-jekyll -b master output```
     - Push master
-`git push origin master`
-
+```git push origin master```
     - Commit and push the new content to `dev`
 ```
 git add content
 git commit -m 'your-commit-message'
 git push origin dev
 ```
-
 11. Now go check your-github-username.github.io to see what your site looks like.
+
 
 #### Bonus!
 
