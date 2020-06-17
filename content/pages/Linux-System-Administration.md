@@ -74,3 +74,52 @@ Processes can be suspended and resumed with `SIGSTOP` (`kill -19`) and `SIGCONT`
 Processes can be killed from inside the `top` manager, by pressing `k` inside the `top` view.
 
 
+### Background Processes
+
+Background jobs can be seen with the `jobs` commmand.
+
+    jobs
+
+`CTRL-Z` ****suspends a process, sending it to the background****, and halting it's operation. This is done by sending a `SIGSTOP` to the process. This could equally be accomplished with `kill -19` - `SIGSTOP`.
+
+Starting a process with the `&` starts the process in the background, which can be quite handy:
+
+    sudo service apache2 restart &
+
+Using the `&`, we can restart Apache in the background, and if we dont redirect the standard out and error, they will be displayed on the terminal, without preventing further typing.
+
+`jobs -p` will show the PIDs of the background jobs, as opposed to their command names.
+
+The `fg` command brings a background job to the foreground - it can take a number, and bring that many jobs to the foreground:
+
+    fg 3
+
+The `bg` command ****restarts suspended background jobs****. It is a counterpart to `CTRL-Z`, as well as `fg`. `bg` can take a job number, which is usually given as `[NUM]+ Stopped [CMD NAME]` when viewing/backgrounding a process.
+
+
+## Logging
+
+### Login Logging
+
+Various log files can be used to track logins:
+
+-   `/var/log/wtmp`
+-   `/var/log/btmp`
+-   `/var/log/lastlog`
+-   `/var/run/utmp`
+
+The `who` command shows the currently logged in users, by reading the `/var/run/utmp` file:
+
+    who
+
+The `last` command shows a list of logins, read from the `/var/log/wtmp` file:
+
+    last
+
+The `last` command will also show reboots from that file, and one can specifically ask to see reboots:
+
+    last reboot
+
+The `lastlog` command reads from the `/var/log/lastlog` file, and shows the last login time of each user:
+
+    lastlog | tail
