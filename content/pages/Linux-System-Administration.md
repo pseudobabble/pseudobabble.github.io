@@ -5,7 +5,7 @@ category: development
 
 # Linux System Administration
 
-## Chapter 1: Process Management
+## Process Management
 
 ### Investigating Processes
 
@@ -95,6 +95,28 @@ The `fg` command brings a background job to the foreground - it can take a numbe
     fg 3
 
 The `bg` command ****restarts suspended background jobs****. It is a counterpart to `CTRL-Z`, as well as `fg`. `bg` can take a job number, which is usually given as `[NUM]+ Stopped [CMD NAME]` when viewing/backgrounding a process.
+
+### Scheduling Jobs
+
+####  One Time Jobs
+
+Basic, one time scheduling can be achieved with `at`. Calling `at` will drop into a terminal based input, where one can define the command to be executed at the appointed time.
+    
+        at 09:00;
+    
+`atq` allows us to query jobs scheduled with `at`. `at -l` can also be used:
+    
+        atq;
+        at -l;
+    
+`at` understands some English too, and if you don't specify the time, will assume you meant **the current time**, plus the qualifier:
+    
+        at next monday;
+        atq;
+    
+`atrm` can remove jobs from the `at` queue.
+    
+        atrm 2;
 
 
 ## Logging
