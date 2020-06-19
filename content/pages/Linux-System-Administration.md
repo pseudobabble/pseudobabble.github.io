@@ -98,30 +98,69 @@ The `bg` command ****restarts suspended background jobs****. It is a counterpart
 
 ### Scheduling Jobs
 
-####  One Time Jobs
+#### One Time Jobs
 
 Basic, one time scheduling can be achieved with `at`. Calling `at` will drop into a terminal based input, where one can define the command to be executed at the appointed time.
-    
-        at 09:00;
-    
+
+    at 09:00;
+
 `atq` allows us to query jobs scheduled with `at`. `at -l` can also be used:
-    
-        atq;
-        at -l;
-    
+
+    atq;
+    at -l;
+
 `at` understands some English too, and if you don't specify the time, will assume you meant **the current time**, plus the qualifier:
-    
-        at next monday;
-        atq;
-    
+
+    at next monday;
+    atq;
+
 `atrm` can remove jobs from the `at` queue.
-    
-        atrm 2;
+
+    atrm 2;
+
+Users can be permitted to use `at` by listing them in the file `/etc/at.allow`, and prevented by listing them in `/etc/at.deny`.
 
 
-## Logging
 
-### Login Logging
+#### Repeated Jobs
+
+`cron` is the well known command for scheduling jobs. Cron is incredibly useful, but as with all timing, it is important to get it right.
+
+`crontab` is both a command, and the name of the configuration file. Every user can have their own `crontab`. The `crontab` format is five fields:
+
+-   minute
+-   hour
+-   day of month
+-   month
+-   day of week
+
+A `*` in any field means any value in that field.
+
+One line in a `crontab` file looks like this:
+
+    15 09 * 02 * python /path/to/script.py
+
+Instead of scheduling using the five fields mentioned above, it is possible to schedule with some shorthand value:
+
+-   `@reboot`
+-   `yearly`
+-   `annually`
+-   `@monthly`
+-   `@daily`
+-   `@weekly`
+-   `@hourly`
+-   `@midnight`
+
+The crontab file should not be edited directly - there is a dedicated edit mode which will use the text editor defined in the `EDITOR` or `VISUAL` environment variables. The edit mode is initiated with `crontab -e`, and the cron table can be viewed with `crontab -l`.
+
+    crontab -l;
+    crontab -e;
+
+The crontab file is at `/etc/crontab`, and contains the `crontab` entries. The various period directories at `/etc/cron.*` contain the tasks to be executing with that periodicity, ie, `/etc/cron.daily`). There is one special directory, `/etc/cron.d`, for cases which need more control than the standard options.
+
+
+
+## Login Logging
 
 Various log files can be used to track logins:
 
@@ -145,3 +184,30 @@ The `last` command will also show reboots from that file, and one can specifical
 The `lastlog` command reads from the `/var/log/lastlog` file, and shows the last login time of each user:
 
     lastlog | tail
+
+The `lastb` command displays the contents of `/var/log/btmp`, which is updated on incorrect password attempts. ****This file does not log failed `ssh` attempts.****
+
+    lastb;
+
+If the file is not present, you can enable bad login logging by creating it.
+
+    touch /var/log/btmp;
+
+Failed superuser (`su`)and `ssh` login attempts will go to either `/var/log/secure`, or `/var/log/auth.log`, depending on the distribution. It is possible to create a custom log file, and direct failed superuser and `ssh` logins there:
+
+    cd syslog_dir;
+    echo "auth.*,authpriv.*    /path/to/custom.log" >> syslog.conf
+
+
+
+# Syslog Daemon and `logger`
+
+`syslogd` was the original system logger daemon. `rsyslogd` ('reliable `syslog`') is the backwards compatible, upgraded system logger. It uses `/etc/rsyslogd.conf`. There is some terminology necessary to understand `rsyslogd` configuration:
+
+-   `facility`: where the message comes from
+-   `priority`: how important/severe is the case
+-   `action`: what to do with the message
+
+Every line in the `.conf` file is an instruction on how to log something, using the terms listed above.
+
+`rsyslog` has modules, which can be used to expand the functionality of the tool, for example, by logging to a database. `man rsyslog.conf`, and `man rsyslogd` contain plenty of information.
