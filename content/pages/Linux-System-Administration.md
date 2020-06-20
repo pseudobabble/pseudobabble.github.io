@@ -143,8 +143,8 @@ One line in a `crontab` file looks like this:
 Instead of scheduling using the five fields mentioned above, it is possible to schedule with some shorthand value:
 
 -   `@reboot`
--   `yearly`
--   `annually`
+-   `@yearly`
+-   `@annually`
 -   `@monthly`
 -   `@daily`
 -   `@weekly`
@@ -211,3 +211,55 @@ Failed superuser (`su`)and `ssh` login attempts will go to either `/var/log/secu
 Every line in the `.conf` file is an instruction on how to log something, using the terms listed above.
 
 `rsyslog` has modules, which can be used to expand the functionality of the tool, for example, by logging to a database. `man rsyslog.conf`, and `man rsyslogd` contain plenty of information.
+
+Facilities, as listed above, are the sources from which log messages can be drawn. These include:
+
+-   `auth`
+-   `authpriv`
+-   `cron`
+-   `daemon`
+-   `ftp`
+-   `kern`
+-   `lpr mail`
+-   `mark` (internal use)
+-   `news`
+-   `syslog`
+-   `user`
+-   `uucp`
+-   `local0-7`
+
+The difference between `auth` and `authpriv` is that `authpriv` denotes ****non-system authorization**** messages, whereas `auth` denotes authorization and authentication messages. `authpriv` can be configured with restricted permissions to log messages which may contain sensitive data.
+
+You may notice `local0-7`. There are 8 facilities `0-7`, which are available to be configured for attached devices, or networked devices which support logging to syslog.
+
+Log messages have priorities, here listed in ascending order:
+
+-   `debug`
+-   `info`
+-   `notice`
+-   `warning`
+-   `err`
+-   `crit`
+-   `alert`
+-   `emerg`
+
+Choosing a severity level will automatically log any messages with a higher severity level. Adding `=`, will restrict the reported messages to exactly the severity specified (eg `=warning`). `.none` will prevent the facility to which it is applied from being reported.
+
+The last component, actions, define what is done with the messages reported from facilities. The default action simply sends a message to the listed username. Any action ca be preceded with a `-` to prevent the log file from being synced after the message. The available actions are:
+
+-   `root, myuser` -> comma separated list of users
+-   `*`            -> all users
+-   `/`            -> file (printer, console, tty, etc)
+-   `-/`           -> file (but don't sync after writing)
+-   `|`            -> named pipe
+-   `@`            -> another syslog server hostname
+
+An simple example configuration in `/etc/rsyslog.conf`:
+
+    local0.emerg  /var/log/attached_device_emergency
+    cron.=debug   myuser
+    syslog.*      /var/log/all_syslog_messages
+
+After changing the configuration, restart the service:
+
+    sudo service rsyslog restart;
