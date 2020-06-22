@@ -263,3 +263,70 @@ An simple example configuration in `/etc/rsyslog.conf`:
 After changing the configuration, restart the service:
 
     sudo service rsyslog restart;
+
+The `logger` command is useful for generating test messages for the logging configuration. It can also be used in scripts to actually log.
+
+    logger -p local0.notice "some information";
+
+`-p` is a flag to set the priority. More information can be found with `man logger`.
+
+The way to watch logs in real time is with the `tail` command. `tail -f FILENAME` is similar to calling `tail FILENAME` each time a new log line is added to the file - it is a 'live updating' `tail`.
+
+    tail -f /var/log/postgresql/postgresql-11-main.log;
+
+Similarly, you can use the `watch` command. Preceding a command with `watch` will repeat the command, by default evey 2 seconds:
+
+    watch whoami;
+
+Log file sizes will eventually become cumbersome. It is common practice to 'rotate' log files, which means compressing and removing intermediate logs to keep the current log file manageable. The command for this is `logrotate`. The main `logrotate` configuration file is at `/etc/logrotate.conf`, and configuration for individual applications is at `/etc/logrotate.d/APPLICATION`.
+
+## Resource Monitoring
+
+### `top`
+
+`top` is the standard way to monitor resources. `top` is an interactive monitoring tool which can show a variety of metrics. Among the ways `top` can be used are by pressing `k`, `t`, or `m`. `k` will cause `top` to request a PID to `kill`. `m` and `t` will toggle between displaying memory and task information. `top` can be called with arguments to customise its scope:
+
+    top p 1 p 345;
+
+The command above will restrict `top` to displaying information about processes with PIDs 1 and 345. More information can be found with `man top`.
+
+Other tools for resource monitoring include `nmon` and `htop`. Both have a similar display to `top`, with more styling.
+
+
+## Network Management
+
+### Concepts
+
+When talking about networking, it is necessary to have a model to contain the discussion. There are two commonly used models: the TCP/IP model and the Open Systems Integration (OSI) model.
+
+1.  TCP/IP Model
+
+    The TCP/IP model has 4 layers:
+    
+    -   Network Access Layer
+    -   Network Layer
+    -   Host-to-Host Layer
+    -   Application Layer
+    
+    I prefer the more detailed OSI model, but the TCP/IP model roughly maps to the OSI model.   
+
+2.  OSI Model
+
+    The OSI model has 7 layers:
+    
+    -   Physical
+    -   Data Link
+    -   Network
+    -   Transport
+    -   Session
+    -   Presentation
+    -   Application
+    
+    1.  Physical Layer (Layer 1)
+    
+        The physical layer concerns things you might associate with electrical engineering: voltage, electrical signals, types of cable and connector, and so on. While this layer provides the foundation of the others, it is not specifically relevant to system administration.
+    
+    2.  Data Link Layer (Layer 2)
+    
+        This is the layer of bridges, switches, frames and MAC addresses - matters which sit **just above** the physical layer. Ethernet and Wireless device management occurs mostly at this layer, with protocols like the Address Resolution Protocol (`arp`) operating at this level. `ifconfig` (or the newer `ip` command) can give some information about the machine status with regard to the devices and protocols of this layer.
+
