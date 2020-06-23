@@ -295,38 +295,120 @@ Other tools for resource monitoring include `nmon` and `htop`. Both have a simil
 
 ## Network Management
 
-### Concepts
+# Concepts
 
 When talking about networking, it is necessary to have a model to contain the discussion. There are two commonly used models: the TCP/IP model and the Open Systems Integration (OSI) model.
 
-1.  TCP/IP Model
+## TCP/IP Model
 
-    The TCP/IP model has 4 layers:
-    
-    -   Network Access Layer
-    -   Network Layer
-    -   Host-to-Host Layer
-    -   Application Layer
-    
-    I prefer the more detailed OSI model, but the TCP/IP model roughly maps to the OSI model.   
+The TCP/IP model has 4 layers:
 
-2.  OSI Model
+-   Network Access Layer
+-   Network Layer
+-   Host-to-Host Layer
+-   Application Layer
 
-    The OSI model has 7 layers:
-    
-    -   Physical
-    -   Data Link
-    -   Network
-    -   Transport
-    -   Session
-    -   Presentation
-    -   Application
-    
-    1.  Physical Layer (Layer 1)
-    
-        The physical layer concerns things you might associate with electrical engineering: voltage, electrical signals, types of cable and connector, and so on. While this layer provides the foundation of the others, it is not specifically relevant to system administration.
-    
-    2.  Data Link Layer (Layer 2)
-    
-        This is the layer of bridges, switches, frames and MAC addresses - matters which sit **just above** the physical layer. Ethernet and Wireless device management occurs mostly at this layer, with protocols like the Address Resolution Protocol (`arp`) operating at this level. `ifconfig` (or the newer `ip` command) can give some information about the machine status with regard to the devices and protocols of this layer.
+I prefer the more detailed OSI model, but the TCP/IP model roughly maps to the OSI model.   
+
+
+## OSI Model
+
+The OSI model has 7 layers:
+
+-   Physical
+-   Data Link
+-   Network
+-   Transport
+-   Session
+-   Presentation
+-   Application
+
+
+### Physical Layer (Layer 1)
+
+The physical layer concerns things you might associate with electrical engineering: voltage, electrical signals, types of cable and connector, and so on. While this layer provides the foundation of the others, it is not specifically relevant to system administration.
+
+
+### Data Link Layer (Layer 2)
+
+This is the layer of bridges, switches, frames and MAC addresses - matters which sit **just above** the physical layer. Ethernet and Wireless device management occurs mostly at this layer, with protocols like the Address Resolution Protocol (`arp`) operating at this level. `ifconfig` (or the newer `ip` command) can give some information about the machine status with regard to the devices and protocols of this layer.
+
+
+### Network Layer (Layer 3)
+
+The network layer mainly concerns `ip` protocol packets. Hosts at this layer are identified by a 32 bit IP address. Other protocols operate on this layer, such as `icmp`. The `/etc/protocols` file has information on the protocols operative.
+
+
+### Transport Layer (Layer 4)
+
+The TCP/IP model calls this the 'host-to-host' layer. The protocols operative at this layer are `tcp` and `udp`.
+
+
+### Session, Presentation, Application Layers (Layers 5, 6, 7)
+
+These layers concern the handling of network data once it has left the Transport Layer, and so are more the concern of application security and networking.
+
+
+## Casting
+
+Along with the type of protocol (`DCHP`, `ARP`, `TCP/IP`, `BOOTP`, etc), the type of cast is an important feature of network communication. There are 4 types of cast:
+
+-   Unicast: destined for exactly one recipient
+-   Multicast: destined for a group of recipients
+-   Broadcast: destined for every receiver on the network
+-   Anycast: goes to the geographically nearest of a defined group.
+
+
+## Network Interface Configuration
+
+`/etc/network/interfaces` is a main network interface configuration file.
+
+    cat /etc/network/interfaces;
+
+The following configuration configures the `loopback` interface, and the `eth0` interface for DCHP (Dynamic Host Configuration Protocol):
+
+    # The loopback network interface
+    auto lo
+    iface lo inet loopback
+    auto eth0
+    iface eth0 inet dhcp
+
+The following configuration is how `/etc/network/interfaces` might look configured for a static ip address:
+
+    auto eth0
+    iface eth0 inet static
+    address 10.42.189.198
+    broadcast 10.42.189.207
+    netmask 255.255.255.240
+    gateway 10.42.189.193
+
+`ifup` and `ifdown` are used to activate and deactivate network interfaces. Network interfaces **should** be deactivated before being reconfigured, but do not have to be.
+
+`ifconfig` is the classic network interface configurator. Just typing `ifconfig` without arguments, will show the list of active network interfaces.
+
+    ifconfig;
+
+`ifconfig` can be supplied with the name of a network interface, which restricts the view to that interface:
+
+    ifconfig eth0; # assuming your interface is called eth0...
+
+`ifconfig` can activate and deactive the network interface. The difference from `ifup` and `ifdown` is that `ifconfig INTERFACE_NAME up/down` will deactivate/reactivate the interface **with the current configuration**, whereas `ifup/down` will reload the configuration from file, including any new configuration.
+
+    ifconfig eth0 down;
+    ifconfig eth0 up;
+    ifconfig eth0;
+
+`ifconfig` can set IP addresses and `MAC` addresses, which are retained until `ifdown/up` or reboot:
+
+    ifconfig; # Check initial configuration
+    ifconfig eth0 192.168.55.22 netmask 255.255.255.0.0; # Set the ip
+    ifconfig eth0 hw ether 00:42:42:42:42:42; # Set the MAC
+    ifconfig; # Check the changes
+    ifdown && ifup; # Reset the changes
+    ifconfig; # Check the reset
+
+On some systems, the `ifconfig` command has been deprecated and replaced with the `ip` command, which is broadly similar, but has some different arguments and functionality:
+
+    ip addr show; # Same as ifconfig
+    ip addr show eth0; # Same as ifconfig eth0
 
