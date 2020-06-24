@@ -412,3 +412,62 @@ On some systems, the `ifconfig` command has been deprecated and replaced with th
     ip addr show; # Same as ifconfig
     ip addr show eth0; # Same as ifconfig eth0
 
+
+`dhclient` is a daemon which manages the client side of the Dynamic Host Configuration Protocol (DHCP). DHCP enables a host to receive a local IP from a DHCP server. Typically your home router is a DCHP server for your local wifi network. If in use, `dhclient` will override any local ip configurations set with `ifconfig` or `ip` when it receives a new ip from teh DHCP server.
+
+Every host (machine) is given a `hostname`, and often positioned in a DNS namespace, to give a fully qualified domain name, for example, 'blog.this.com'. On Debian and Debian-derived distros, the hostname can be found (and set) in `/etc/hostname`.
+
+The `hostname` can be temporarily set using `hostname NEW_HOSTNAME`:
+
+    cat /etc/hostname; # Read hostname from file
+    hostname some-new-hostname; # Temporarily set a new hostname
+    hostname; # Check the new hostname
+
+`sysctl` can be used to read and write the `hostname`:
+
+    sysctl kernel.hostname; # What is the current hostname?
+    sysctl kernel.hostname = another-hostname; # Set a different hostname
+    sysctl kernel.hostname; # Check using sysctl
+    hostname; # Check using hostname command
+
+The `arp` command can be used to manipulate the system ARP cache - the list of machines recently communicated with. ARP is the Address Resolution Protocol, a Data Link (2) Layer protocol, which enables IP addresses to be resolved to MAC (Media Access Control) addresses. IP addresses identify a host on the Network (3) Layer, MAC addresses identify a machine on the Data Link (2) Layer. 
+
+List the hosts in the ARP cache with:
+
+    arp; # Standard
+    arp -a; # Alternative 'BSD style' no columns view
+
+Remove an ARP cache entry with:
+
+    arp -d IP_OR_HOSTNAME; # Requires root
+
+The `route` command will show the machine's local routing table, as will `netstat -r`. `route` also allows one to manipulate the routing table:
+
+    route add default gw SOME_IP; # Add a default gateway 
+
+`man route` will give more information about the other features of `route`.
+
+`ping` is an extremely useful tool for checking connection status. `ping` sends Internet Control Message Protocol (ICMP) packets to the target IP, and reports back any errors, packet loss, network latency, etc. It is almost certainly the fastest way to check whether a machine is connected to a network.
+
+    ping 192.168.0.1;
+
+
+## `ssh`
+
+`ssh` is the Secure Shell. `ssh` uses public-key cryptography to authenticate with a remote host and provide a secure and private connection with that host.
+
+`/etc/ssh/` is where much of the `ssh` configuration is to be found. Each user also has a `.ssh/` directory, in which a file named `config` can be placed to define the connection configuration for specified remote hosts.
+
+A `~/.ssh/config` file might look like this:
+
+    Host host1
+        HostName SOME.IP.HERE
+        User some-user
+        Port 22 # usually
+        IdentityFile path/to/ssh/key/here
+    
+    Host host2
+        HostName ANOTHER.IP.HERE
+        User a-different-user
+        Port specify-a-different-port
+
