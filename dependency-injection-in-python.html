@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Person">
+<head>
+            <meta charset="utf-8">
+        <!-- Site Meta Data -->
+        <title>Dependency Injection in Python</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Harry">
+
+        <link rel="shortcut icon" href="">
+
+        <!-- schema.org -->
+        <meta itemprop="name" content="scribbles and babbles">
+        <meta itemprop="image" content="">
+        <meta itemprop="description" content="">
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+        <!-- Style Meta Data -->
+        <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css"/>
+
+        <!-- Feed Meta Data -->
+            <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+                  title="scribbles and babbles ATOM Feed"/>
+
+        <!-- Twitter Feed -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:image" content="">
+
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:url" content="./dependency-injection-in-python.html">
+    <meta name="twitter:title" content="scribbles and babbles ~ Dependency Injection in Python">
+    <meta name="twitter:description" content="Dependency Injection in Python Dependency inversion is the &#39;D&#39; in the SOLID principles. It describes the practice of having class dependencies externally configured. This enables high-level code to be independent of low-level code, by each of them depending on an interface. Depending only on an interface, it is irrelevant from …">
+
+    <!-- Facebook Meta Data -->
+    <meta property="og:title" content="scribbles and babbles ~ Dependency Injection in Python"/>
+    <meta property="og:description" content="Dependency Injection in Python Dependency inversion is the &#39;D&#39; in the SOLID principles. It describes the practice of having class dependencies externally configured. This enables high-level code to be independent of low-level code, by each of them depending on an interface. Depending only on an interface, it is irrelevant from …"/>
+    <meta property="og:image" content=""/>
+</head>
+
+<body>
+<!-- Sidebar -->
+<aside>
+    <!--<center><a href="."><img id="avatar" src=""></a></center>-->
+    <h1>scribbles and babbles</h1>
+        <p>Software Engineering, mostly</p>
+    <br>
+
+
+    <nav class="nav">
+        <ul class="list-bare">
+
+                <li><a class="nav__link" href="https://pseudobabble.github.io">Blog</a></li>
+
+                <li><a class="nav__link" href="./pages/linux-system-administration.html">Linux System Administration</a></li>
+                <li><a class="nav__link" href="./pages/python-standard-library.html">Python Standard Library</a></li>
+
+        </ul>
+    </nav>
+
+    <p class="social">
+                <a href="https://www.linkedin.com/in/harry-johnson-7044b330/" target="_blank"><img
+                        src="./theme/images/icons/linkedin.png"></a>
+                <a href="https://github.com/pseudobabble" target="_blank"><img
+                        src="./theme/images/icons/github.png"></a>
+            <a href="./feeds/all.atom.xml" rel="alternate">
+                <img src="./theme/images/icons/rss.png"></a>
+    </p>
+
+        <h2>Categories</h2>
+        <ul class="navbar">
+                <li class="active"><a
+                        href="./category/development.html">development</a></li>
+                <li><a
+                        href="./category/development-f.html">development, f#</a></li>
+        </ul>
+
+
+</aside>
+
+<!-- Content -->
+<article>
+    <section id="content">
+        <article>
+            <h2 class="post_title post_detail"><a href="./dependency-injection-in-python.html" rel="bookmark"
+                                                  title="Permalink to Dependency Injection in Python">Dependency Injection in Python</a></h2>
+            <div class="entry-content blog-post">
+                <h1>Dependency Injection in Python</h1>
+<p>Dependency inversion is the 'D' in the SOLID principles. It
+describes the practice of having class dependencies externally
+configured. This enables high-level code to be independent of
+low-level code, by each of them depending on an
+interface. Depending only on an interface, it is irrelevant from
+the perspective of a given class what form the specific
+implementation of each of its dependencies has. Since the
+behaviour of the class depends on the behaviour of its
+dependencies, having the dependencies externally configurable
+<strong>inverts control</strong> of the classes behaviour, moving it from the
+class itself (constrained by its dependencies) to the class
+configurer.</p>
+<p>Dependency injection is a common technique which achieves
+Dependency Inversion. When using Dependency injection, objects
+are constructed with their dependencies by other
+objects. Constructor injection and setter injection are the most
+common techniques, where the dependencies are passed into the
+constructor and a setter method, respectively. In many cases, a
+service registry (external configuration) defines a dependency
+tree which describes how the application is to construct at
+runtime.</p>
+<p>In python, dependency inversion capabilities can be achieved
+'inline', as it were. Whereas normally you could define some kind
+of service registry which instructs the application to construct
+with some dependency tree, in Python you can simply define default
+values for the injection parameters:</p>
+<div class="highlight"><pre><span></span><code>    <span class="k">class</span> <span class="n">Printed:</span>
+        <span class="n">def</span> <span class="n">get_text</span>(<span class="nb">self</span>):
+        <span class="nb">print</span> <span class="s">&#39;foo&#39;</span>
+
+    <span class="k">class</span> <span class="n">Printer:</span>
+        <span class="n">def</span> <span class="n">__init__</span>(<span class="nb">self</span>, <span class="n">dependency:</span> <span class="n">Printed</span> = <span class="n">Printed</span>):
+        <span class="nb">self</span>.<span class="n">dependency</span> = <span class="n">dependency</span>()
+
+        <span class="n">def</span> <span class="n">execute</span>(<span class="nb">self</span>):
+        <span class="nb">self</span>.<span class="n">dependency</span>.<span class="n">get_text</span>()
+</code></pre></div>
+
+
+<p>As you can see, dependencies can be managed 'inline', and any
+given dependency can be swapped out for another at the point of
+use.</p>
+<p>But what if <code>Printer</code> gets passed something unexpected at runtime?</p>
+<p>Python's duck-typing is <strong><em>*roughly</em></strong><em> the same thing as </em><em>implicit</em>*
+interfaces. If two objects have a method called `speak()`, then it
+is irrelevant if they explicitly share an interface, because
+client code can call the `speak()` method, as it expects. There is
+an implicit interface which the two `speak()`ers both
+implement. It may seem utterly strange to static-typing guys, but the
+Pythonic way to handle these situations is with a
+<code>try:... except:</code> block.</p>
+<p>In Python 3, you can add typehints to the method signature, which,
+in combination with 'inline' dependency injection, and the <code>abc</code>
+built-in, allows the interface to be explicitly represented and
+enforced:</p>
+<div class="highlight"><pre><span></span><code>    <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+    <span class="k">class</span> <span class="nc">Printable</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+        <span class="nd">@abstractmethod</span>
+        <span class="k">def</span> <span class="nf">get_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="bp">NotImplemented</span>
+
+    <span class="k">class</span> <span class="nc">PrintedFoo</span><span class="p">(</span><span class="n">Printable</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">get_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;foo&#39;</span>
+
+    <span class="k">class</span> <span class="nc">PrintedBar</span><span class="p">(</span><span class="n">Printable</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">get_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;bar&#39;</span>
+
+    <span class="k">class</span> <span class="nc">Printer</span><span class="p">:</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dependency</span><span class="p">:</span> <span class="n">Printable</span> <span class="o">=</span> <span class="n">PrintedFoo</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dependency</span> <span class="o">=</span> <span class="n">dependency</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependency</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>  <span class="c1"># &#39;foo&#39;</span>
+
+    <span class="n">printer</span> <span class="o">=</span> <span class="n">Printer</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">printer</span><span class="o">.</span><span class="n">execute</span><span class="p">())</span>
+</code></pre></div>
+
+
+<p><code>abc</code> is the name of a python built-in module and stands for
+Abstract Base Class. <code>abc</code>'s allow us to define abstract methods
+and properties which must be implemented in subclasses.</p>
+<p>Making the <code>Printed</code> classes each subclasses of <code>Printable</code>
+enforces implementation of the <code>get_text</code> method, and the typehint
+on <code>Printer</code>'s <code>__init__</code> method ensures that the dependency
+passed is a <code>Printable</code>.</p>
+<p>With these two techniques ('inline' dependency injection and
+explicit interface declaration), dependency injection in Python is
+both rigorous and flexible: dependencies can be managed without
+the need of an additional registry, dependencies can be
+typehinted, and interfaces can be explicitly enforced.</p>
+            </div>
+            <div class="post_list">
+                <span>By </span>
+                <a href="./author/harry.html">@Harry</a>
+                <span> in </span>
+                <span class="post_category"><a href="./category/development.html" rel="bookmark"
+                                               title="Permalink to development">[ development ]</a></span>
+                <span class="post_date">Mon 06 April 2020</span>
+                <div><span>Tags : </span>
+                </div>
+
+                <div class="entry-social">
+                    <span class="twitter"><a target="_blank" rel="nofollow"
+                                             onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;"
+                                             title="Twitter"
+                                             href="https://twitter.com/share?url=./dependency-injection-in-python.html&text=Dependency Injection in Python&via="><img
+                            src="./theme/images/icons/twitter-s.png"></a></span>
+
+                    <span class="gplus"><a target="_blank" title="Google +"
+                                           href="https://plus.google.com/share?url=./dependency-injection-in-python.html&hl=fr"
+                                           rel="nofollow"
+                                           onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="./theme/images/icons/google-s.png"></a></span>
+
+                    <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow"
+                                              onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"
+                                              href="https://www.facebook.com/sharer.php?u=./dependency-injection-in-python.html&t=Dependency Injection in Python"><img
+                            src="./theme/images/icons/facebook-s.png"></a></span>
+
+                    <a target="_blank" title="Linkedin"
+                       href="https://www.linkedin.com/shareArticle?mini=true&url=./dependency-injection-in-python.html&title=Dependency Injection in Python"
+                       rel="nofollow"
+                       onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="./theme/images/icons/linkedin-s.png"></a>
+
+                    <span class="mail"><a
+                            href="mailto:?subject=Dependency Injection in Python&amp;body=Viens découvrir un article à propos de [Dependency Injection in Python] sur le site de Harry. ./dependency-injection-in-python.html"
+                            title="Share by Email" target="_blank"><img
+                            src="./theme/images/icons/mail-s.png"></a></span>
+                </div>
+            </div>
+        </article>
+    </section>
+</article>
+
+<!-- Footer -->
+    <footer>
+        <p>
+            Blog powered by <a href="http://getpelican.com/">Pelican</a>,
+            which takes great advantage of <a href="http://python.org">Python</a>.
+            Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a
+                href="https://parbhatpuri.com/">@parbhat</a>.
+        </p>
+    </footer>
+
+
+</body>
+</html>

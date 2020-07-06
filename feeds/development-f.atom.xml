@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>scribbles and babbles - development, f#</title><link href="/" rel="alternate"></link><link href="feeds/development-f.atom.xml" rel="self"></link><id>/</id><updated>2020-05-16T00:00:00+01:00</updated><entry><title>Euler 1 &amp; 2</title><link href="euler-1-2.html" rel="alternate"></link><published>2020-05-16T00:00:00+01:00</published><updated>2020-05-16T00:00:00+01:00</updated><author><name>Harry</name></author><id>tag:None,2020-05-16:euler-1-2.html</id><summary type="html">&lt;h1&gt;Euler 1&lt;/h1&gt;
+&lt;p&gt;The first Euler problem is to get the sum of all multiples of 3 or 5 below 1000.&lt;/p&gt;
+&lt;p&gt;The first thing we need is a list of the numbers below 1000, which in F# is quite simple:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;[1..999]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then, a function to filter the list for multiples …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Euler 1&lt;/h1&gt;
+&lt;p&gt;The first Euler problem is to get the sum of all multiples of 3 or 5 below 1000.&lt;/p&gt;
+&lt;p&gt;The first thing we need is a list of the numbers below 1000, which in F# is quite simple:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;[1..999]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then, a function to filter the list for multiples of 3 or 5:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;let filterAndAdd listToFilter =&lt;/span&gt;
+&lt;span class="err"&gt;    listToFilter &lt;/span&gt;
+&lt;span class="err"&gt;    |&amp;gt; List.filter mulipleOfThreeOrFive&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We define a function &lt;code&gt;filterAndAdd&lt;/code&gt; which takes a &lt;code&gt;listToFilter&lt;/code&gt;, and passes it straight to the &lt;code&gt;List.filter&lt;/code&gt; function, which filters using the &lt;code&gt;multipleOfThreeOrFive&lt;/code&gt; function, and returns the results.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;List.filter&lt;/code&gt; function takes a list, and a function which returns true when applied to a list element which is to be selected, and false otherwise. &lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;multipleOfThreeOrFive&lt;/code&gt; function exemplifies &lt;strong&gt;function composition&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;multipleOf&lt;/span&gt; &lt;span class="n"&gt;factor&lt;/span&gt; &lt;span class="n"&gt;multiple&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;multiple&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;factor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+&lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;mulipleOfThreeOrFive&lt;/span&gt; &lt;span class="n"&gt;element&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 
+    &lt;span class="n"&gt;multipleOf&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;element&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;multipleOf&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;element&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The &lt;code&gt;multipleOf&lt;/code&gt; function takes two arguments &lt;code&gt;factor&lt;/code&gt; and &lt;code&gt;multiple&lt;/code&gt; returns true if the multiple divided by the factor is 0, and false otherwise. &lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;multipleOfThreeOrFive&lt;/code&gt; function takes an &lt;code&gt;element&lt;/code&gt; (the multiple) and passes to it the &lt;code&gt;multipleOf&lt;/code&gt; function along with either 3 or 5 as the factor, on either side of a bitwise OR, returning true if the &lt;code&gt;element&lt;/code&gt; is a multiple of either 3 or 5.&lt;/p&gt;
+&lt;p&gt;Next, we need a function to sum a list of integers:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;let sumList list = List.reduce (+) list&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;sumList&lt;/code&gt; takes a list, and reduces it over the &lt;code&gt;+&lt;/code&gt; operator.&lt;/p&gt;
+&lt;p&gt;Now we can pipe the result of &lt;code&gt;multipleOfThreeOrFive&lt;/code&gt; to &lt;code&gt;sumList&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;let filterAndAdd listToFilter =&lt;/span&gt;
+&lt;span class="err"&gt;    listToFilter &lt;/span&gt;
+&lt;span class="err"&gt;    |&amp;gt; List.filter mulipleOfThreeOrFive&lt;/span&gt;
+&lt;span class="err"&gt;    |&amp;gt; sumList&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now create the entry point, pass in the initial list to be printed:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[&amp;lt;EntryPoint&amp;gt;]&lt;/span&gt;
+&lt;span class="na"&gt;let main argv&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&lt;/span&gt;
+&lt;span class="s"&gt;  printfn &amp;quot;Euler 1: %i&amp;quot; (EulerOne.filterAndAdd [1..999])&lt;/span&gt;
+&lt;span class="s"&gt;  0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;a id="orgb0831bb"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;Euler 2&lt;/h1&gt;
+&lt;p&gt;Euler problem 2 is to sum the evens in the Fibbonaci up to 4,000,000.&lt;/p&gt;
+&lt;p&gt;First we need to generate a Fibbonaci sequence. I stole this from someone on stackoverflow:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;// generate an infinite Fibonacci sequence&lt;/span&gt;
+&lt;span class="err"&gt;// from: https://stackoverflow.com/questions/2845744/generating-fibonacci-series-in-f&lt;/span&gt;
+&lt;span class="err"&gt;let fibSeq =    &lt;/span&gt;
+&lt;span class="err"&gt;    let rec fibseq n1 n2 = // recursive fibseq takes 2 params&lt;/span&gt;
+&lt;span class="err"&gt;        seq { let n0 = n1 + n2 // define sequence and calculate start&lt;/span&gt;
+&lt;span class="err"&gt;              yield n0 // yield start&lt;/span&gt;
+&lt;span class="err"&gt;              yield! fibseq n0 n1 } // merge with seq generated by fibseq&lt;/span&gt;
+&lt;span class="err"&gt;        seq { yield 1I ; yield 1I ; yield! (fibseq 1I 1I) } // return seq whose t3 is fibseq(t1, t2)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Its pretty nice. I will let you read the stackoverflow for that one.&lt;/p&gt;
+&lt;p&gt;The rest is much as with Problem 1, filtering and summing. The only issue I encountered was the requirement to handle &lt;code&gt;BigIntegers&lt;/code&gt;, which I solved by specifying types and parsing wherever required:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="o"&gt;//&lt;/span&gt;  &lt;span class="n"&gt;filter&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;evens&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;take&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;first&lt;/span&gt; &lt;span class="k"&gt;limit&lt;/span&gt; &lt;span class="n"&gt;numbers&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;sequence&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="k"&gt;convert&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
+&lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;fibGen&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 
+    &lt;span class="n"&gt;fibSeq&lt;/span&gt; 
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Seq&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;BigInteger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BigInteger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Seq&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;takeWhile&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;BigInteger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Seq&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toList&lt;/span&gt;
+
+&lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;fibSum&lt;/span&gt; &lt;span class="k"&gt;limit&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 
+    &lt;span class="n"&gt;fibGen&lt;/span&gt; &lt;span class="k"&gt;limit&lt;/span&gt;
+    &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;sumList&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The whole file looks like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;open&lt;/span&gt; &lt;span class="k"&gt;System&lt;/span&gt;
+&lt;span class="k"&gt;open&lt;/span&gt; &lt;span class="k"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Numerics&lt;/span&gt;
+
+&lt;span class="n"&gt;module&lt;/span&gt; &lt;span class="n"&gt;EulerOne&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;sumList&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reduce&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
+
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;multipleOf&lt;/span&gt; &lt;span class="n"&gt;factor&lt;/span&gt; &lt;span class="n"&gt;multiple&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;multiple&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;factor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;mulipleOfThreeOrFive&lt;/span&gt; &lt;span class="n"&gt;element&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 
+            &lt;span class="n"&gt;multipleOf&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;element&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;multipleOf&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;element&lt;/span&gt;
+
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;filterAndAdd&lt;/span&gt; &lt;span class="n"&gt;listToFilter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+            &lt;span class="n"&gt;listToFilter&lt;/span&gt; 
+            &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt; &lt;span class="n"&gt;mulipleOfThreeOrFive&lt;/span&gt;
+            &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;sumList&lt;/span&gt;
+
+
+&lt;span class="n"&gt;module&lt;/span&gt; &lt;span class="n"&gt;EulerTwo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;sumList&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;list&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;BigInteger&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;BigInteger&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;sum&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
+
+    &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;generate&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;infinite&lt;/span&gt; &lt;span class="n"&gt;Fibonacci&lt;/span&gt; &lt;span class="n"&gt;sequence&lt;/span&gt;
+    &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;stackoverflow&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;questions&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;2845744&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;generating&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;fibonacci&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;series&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;fibSeq&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;    
+        &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;rec&lt;/span&gt; &lt;span class="n"&gt;fibseq&lt;/span&gt; &lt;span class="n"&gt;n1&lt;/span&gt; &lt;span class="n"&gt;n2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="k"&gt;recursive&lt;/span&gt; &lt;span class="n"&gt;fibseq&lt;/span&gt; &lt;span class="n"&gt;takes&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;
+            &lt;span class="n"&gt;seq&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt; &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;n0&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;n1&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;n2&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;define&lt;/span&gt; &lt;span class="n"&gt;sequence&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;calculate&lt;/span&gt; &lt;span class="k"&gt;start&lt;/span&gt;
+              &lt;span class="n"&gt;yield&lt;/span&gt; &lt;span class="n"&gt;n0&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;yield&lt;/span&gt; &lt;span class="k"&gt;start&lt;/span&gt;
+              &lt;span class="n"&gt;yield&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt; &lt;span class="n"&gt;fibseq&lt;/span&gt; &lt;span class="n"&gt;n0&lt;/span&gt; &lt;span class="n"&gt;n1&lt;/span&gt; &lt;span class="err"&gt;}&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="n"&gt;merge&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;seq&lt;/span&gt; &lt;span class="k"&gt;generated&lt;/span&gt; &lt;span class="k"&gt;by&lt;/span&gt; &lt;span class="n"&gt;fibseq&lt;/span&gt;
+        &lt;span class="n"&gt;seq&lt;/span&gt; &lt;span class="err"&gt;{&lt;/span&gt; &lt;span class="n"&gt;yield&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;yield&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;yield&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fibseq&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="err"&gt;}&lt;/span&gt; &lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;seq&lt;/span&gt; &lt;span class="n"&gt;whose&lt;/span&gt; &lt;span class="n"&gt;t3&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;fibseq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;t2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+    &lt;span class="o"&gt;//&lt;/span&gt;  &lt;span class="n"&gt;filter&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;evens&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;take&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;first&lt;/span&gt; &lt;span class="k"&gt;limit&lt;/span&gt; &lt;span class="n"&gt;numbers&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;sequence&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="k"&gt;convert&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;fibGen&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 
+        &lt;span class="n"&gt;fibSeq&lt;/span&gt; 
+        &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Seq&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;BigInteger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;BigInteger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Seq&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;takeWhile&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fun&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;BigInteger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;limit&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+        &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Seq&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;toList&lt;/span&gt;
+
+    &lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;fibSum&lt;/span&gt; &lt;span class="k"&gt;limit&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 
+        &lt;span class="n"&gt;fibGen&lt;/span&gt; &lt;span class="k"&gt;limit&lt;/span&gt;
+        &lt;span class="o"&gt;|&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;sumList&lt;/span&gt;
+
+
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;EntryPoint&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt; &lt;span class="n"&gt;argv&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+  &lt;span class="n"&gt;printfn&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;Euler 1: %i&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;EulerOne&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filterAndAdd&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;..&lt;/span&gt;&lt;span class="mi"&gt;999&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+  &lt;span class="n"&gt;printfn&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;Euler 2: %A&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;EulerTwo&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fibSum&lt;/span&gt; &lt;span class="mi"&gt;4000000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="development, f#"></category></entry></feed>

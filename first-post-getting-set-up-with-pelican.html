@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Person">
+<head>
+            <meta charset="utf-8">
+        <!-- Site Meta Data -->
+        <title>First Post - Getting Set Up with Pelican</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Harry">
+
+        <link rel="shortcut icon" href="">
+
+        <!-- schema.org -->
+        <meta itemprop="name" content="scribbles and babbles">
+        <meta itemprop="image" content="">
+        <meta itemprop="description" content="">
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+        <!-- Style Meta Data -->
+        <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css"/>
+
+        <!-- Feed Meta Data -->
+            <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+                  title="scribbles and babbles ATOM Feed"/>
+
+        <!-- Twitter Feed -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:image" content="">
+
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:url" content="./first-post-getting-set-up-with-pelican.html">
+    <meta name="twitter:title" content="scribbles and babbles ~ First Post - Getting Set Up with Pelican">
+    <meta name="twitter:description" content="Getting started with Python and Pelican for Github Pages I&#39;ve used the excellent guide to getting started on Github Pages using python and Pelican found here: Github Pages with python and Pelican. I&#39;ve used python3 here. The synopsis is as follows: Create a virtual environment virtualenv -p python3 your-venv-name Activate …">
+
+    <!-- Facebook Meta Data -->
+    <meta property="og:title" content="scribbles and babbles ~ First Post - Getting Set Up with Pelican"/>
+    <meta property="og:description" content="Getting started with Python and Pelican for Github Pages I&#39;ve used the excellent guide to getting started on Github Pages using python and Pelican found here: Github Pages with python and Pelican. I&#39;ve used python3 here. The synopsis is as follows: Create a virtual environment virtualenv -p python3 your-venv-name Activate …"/>
+    <meta property="og:image" content=""/>
+</head>
+
+<body>
+<!-- Sidebar -->
+<aside>
+    <!--<center><a href="."><img id="avatar" src=""></a></center>-->
+    <h1>scribbles and babbles</h1>
+        <p>Software Engineering, mostly</p>
+    <br>
+
+
+    <nav class="nav">
+        <ul class="list-bare">
+
+                <li><a class="nav__link" href="https://pseudobabble.github.io">Blog</a></li>
+
+                <li><a class="nav__link" href="./pages/linux-system-administration.html">Linux System Administration</a></li>
+                <li><a class="nav__link" href="./pages/python-standard-library.html">Python Standard Library</a></li>
+
+        </ul>
+    </nav>
+
+    <p class="social">
+                <a href="https://www.linkedin.com/in/harry-johnson-7044b330/" target="_blank"><img
+                        src="./theme/images/icons/linkedin.png"></a>
+                <a href="https://github.com/pseudobabble" target="_blank"><img
+                        src="./theme/images/icons/github.png"></a>
+            <a href="./feeds/all.atom.xml" rel="alternate">
+                <img src="./theme/images/icons/rss.png"></a>
+    </p>
+
+        <h2>Categories</h2>
+        <ul class="navbar">
+                <li class="active"><a
+                        href="./category/development.html">development</a></li>
+                <li><a
+                        href="./category/development-f.html">development, f#</a></li>
+        </ul>
+
+
+</aside>
+
+<!-- Content -->
+<article>
+    <section id="content">
+        <article>
+            <h2 class="post_title post_detail"><a href="./first-post-getting-set-up-with-pelican.html" rel="bookmark"
+                                                  title="Permalink to First Post - Getting Set Up with Pelican">First Post - Getting Set Up with Pelican</a></h2>
+            <div class="entry-content blog-post">
+                <h1>Getting started with Python and Pelican for Github Pages</h1>
+<p>I've used the excellent guide to getting started on Github Pages using python and Pelican found here: <a href="https://opensource.com/article/19/5/run-your-blog-github-pages-python">Github Pages with python and Pelican</a>.</p>
+<p>I've used python3 here.</p>
+<p>The synopsis is as follows:</p>
+<ol>
+<li>Create a virtual environment
+<code>virtualenv -p python3 your-venv-name</code></li>
+<li>Activate the virtualenv
+<code>source your-venv-name/bin/activate</code></li>
+<li>Install the required packages
+<code>pip install pelican ghp-import Markdown</code></li>
+<li>Create the repo which will be used for your site
+Assuming you already have a Github account, create a new repository named <code>your-username.github.io</code>. This is where the files associated with your site will be stored.</li>
+<li>Clone your repo and move into it
+<code>git clone your-repo-url &amp;&amp; cd your-username.github.io</code></li>
+<li>Separate your sites metadata
+Erik (the author of the guide I followed) has a useful technique to separate your sites metadata (config files, etc) from the content. You commit the metadata to a separate branch (which I've named <code>dev</code>), and use <code>ghp-import</code> to commit the content to <code>master</code>.
+<code>git checkout -b dev</code></li>
+<li>Configure your site with Pelican
+<code>pelican-quickstart</code></li>
+<li>You should see the following output, line by line:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="n">Welcome</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span><span class="w"> </span><span class="n">v3</span><span class="mf">.7.1</span><span class="p">.</span><span class="w"></span>
+
+<span class="n">This</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pelican</span><span class="o">-</span><span class="n">based</span><span class="w"> </span><span class="n">website</span><span class="p">.</span><span class="w"></span>
+
+<span class="n">Please</span><span class="w"> </span><span class="n">answer</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">following</span><span class="w"> </span><span class="n">questions</span><span class="w"> </span><span class="n">so</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">generate</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">files</span><span class="w"></span>
+<span class="n">needed</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">Pelican</span><span class="p">.</span><span class="w"></span>
+
+<span class="o">&gt;</span><span class="w"> </span><span class="k">Where</span><span class="w"> </span><span class="n">do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">site</span><span class="vm">?</span><span class="w"> </span><span class="o">[</span><span class="n">.</span><span class="o">]</span><span class="w">  </span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">What</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">site</span><span class="vm">?</span><span class="w"> </span><span class="n">Super</span><span class="w"> </span><span class="n">blog</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">Who</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">site</span><span class="vm">?</span><span class="w"> </span><span class="n">username</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">What</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">language</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">site</span><span class="vm">?</span><span class="w"> </span><span class="o">[</span><span class="n">en</span><span class="o">]</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">specify</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">URL</span><span class="w"> </span><span class="k">prefix</span><span class="vm">?</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.,</span><span class="w"> </span><span class="nl">http</span><span class="p">:</span><span class="o">//</span><span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="w">   </span><span class="p">(</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="n">n</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">article</span><span class="w"> </span><span class="n">pagination</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">How</span><span class="w"> </span><span class="n">many</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="n">per</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="n">do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="vm">?</span><span class="w"> </span><span class="o">[</span><span class="n">10</span><span class="o">]</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">What</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="nc">time</span><span class="w"> </span><span class="k">zone</span><span class="vm">?</span><span class="w"> </span><span class="o">[</span><span class="n">Europe/Paris</span><span class="o">]</span><span class="w"> </span><span class="n">US</span><span class="o">/</span><span class="n">Central</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">generate</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Fabfile</span><span class="o">/</span><span class="n">Makefile</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">automate</span><span class="w"> </span><span class="n">generation</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">publishing</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">auto</span><span class="o">-</span><span class="n">reload</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">simpleHTTP</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">assist</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">theme</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">site</span><span class="w"> </span><span class="n">development</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">FTP</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">n</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">SSH</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">n</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Dropbox</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">n</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">S3</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">n</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Rackspace</span><span class="w"> </span><span class="n">Cloud</span><span class="w"> </span><span class="n">Files</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">n</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">GitHub</span><span class="w"> </span><span class="n">Pages</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"> </span><span class="k">Is</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">personal</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="p">(</span><span class="n">username</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span><span class="p">)</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="w"></span>
+<span class="n">Done</span><span class="p">.</span><span class="w"> </span><span class="n">Your</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">username</span><span class="o">/</span><span class="n">blog</span><span class="w"></span>
+</code></pre></div>
+
+
+<ol>
+<li>Commit your <code>dev</code> metadata, but first, remember to create a <code>.gitignore' file to avoid commiting the whole</code>venv` folder:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="err">touch .gitignore &amp;&amp; echo &quot;venv&quot; &gt;&gt; .gitignore</span>
+<span class="err">git add .</span>
+<span class="err">git commit -m &quot;your-commit-message&quot;</span>
+<span class="err">git push origin dev</span>
+</code></pre></div>
+
+
+<ol>
+<li>Create some content for your site</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="err">cd content</span>
+<span class="err">mkdir pages images</span>
+<span class="err">cp ~/Pictures/my-test-image.png images</span>
+<span class="err">touch 01-My-First-Post.md</span>
+<span class="err">touch pages/My-About-Page.md</span>
+</code></pre></div>
+
+
+<p>Open up the <code>01-My-First-Post.md</code> file and enter the following:</p>
+<div class="highlight"><pre><span></span><code><span class="n">title</span><span class="o">:</span> <span class="n">My</span> <span class="n">First</span> <span class="n">Post</span>
+<span class="n">date</span><span class="o">:</span> <span class="o">&lt;</span><span class="n">today</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">date</span><span class="o">&gt;</span>
+<span class="n">author</span><span class="o">:</span> <span class="n">your</span><span class="o">-</span><span class="n">name</span>
+
+<span class="err">#</span> <span class="n">My</span> <span class="n">First</span> <span class="n">Post</span>
+
+<span class="n">Some</span> <span class="n">content</span> <span class="n">blah</span> <span class="n">blah</span> <span class="n">blah</span>
+</code></pre></div>
+
+
+<p>The first three lines (beginning <code>title:</code>) are part of Pelican's metadata. There are more available, check the docs.</p>
+<p>Now open the <code>pages/My-About-Page.md</code> file and enter the following:</p>
+<div class="highlight"><pre><span></span><code><span class="nl">title</span><span class="p">:</span> <span class="n">About</span>
+<span class="nl">date</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">today</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">date</span><span class="o">&gt;</span>
+
+<span class="o">!</span><span class="p">[</span><span class="n">A</span> <span class="n">Picture</span><span class="p">][</span><span class="n">my_picture</span><span class="p">]</span>
+
+<span class="n">Something</span> <span class="n">about</span> <span class="n">yourself</span> <span class="n">here</span>
+
+
+<span class="p">[</span><span class="n">my_picture</span><span class="p">]</span><span class="o">:</span> <span class="p">{</span><span class="k">static</span><span class="p">}</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">my</span><span class="o">-</span><span class="n">test</span><span class="o">-</span><span class="n">image</span><span class="p">.</span><span class="n">png</span>
+</code></pre></div>
+
+
+<ol>
+<li>Publish<ul>
+<li>Have Pelican generate the content:
+<code>pelican content -o output -s publishconf.py</code></li>
+<li>Use ghp-import to commit it to master
+<code>ghp-import -m "your-commit-message" --no-jekyll -b master output</code></li>
+<li>Push master
+<code>git push origin master</code></li>
+<li>Commit and push the new content to <code>dev</code></li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="err">git add content</span>
+<span class="err">git commit -m &#39;your-commit-message&#39;</span>
+<span class="err">git push origin dev</span>
+</code></pre></div>
+
+
+<ol>
+<li>Now go check your-github-username.github.io to see what your site looks like.</li>
+</ol>
+<h4>Bonus!</h4>
+<p>I decided to create a script to handle all those publishing commands:</p>
+<p><code>touch publish.sh &amp;&amp; chmod +x publish.sh</code></p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># activate venv - from your project root dir</span>
+<span class="nb">source</span> venv/bin/activate
+
+<span class="c1"># generate html</span>
+pelican content -o output -s publishconf.py<span class="p">;</span>
+
+<span class="c1"># github pages commit output dir to master</span>
+ghp-import -m <span class="s2">&quot;Publishing on </span><span class="si">${</span><span class="nv">TODAY</span><span class="si">}</span><span class="s2">&quot;</span> --no-jekyll -b master output
+
+<span class="c1"># push master</span>
+git push origin master
+
+<span class="c1"># commit and push dev</span>
+git add content
+git commit -m <span class="s2">&quot;changes to dev on </span><span class="si">${</span><span class="nv">TODAY</span><span class="si">}</span><span class="s2">&quot;</span>
+git push origin dev
+
+<span class="c1"># deactivate venv</span>
+deactivate
+</code></pre></div>
+</td></tr></table>
+
+<p>I some shell variables to take care of automatically putting data into the commit messages. You may need to enter passwords during script execution, depending on if you use HTTPS or SSH. </p>
+            </div>
+            <div class="post_list">
+                <span>By </span>
+                <a href="./author/harry.html">@Harry</a>
+                <span> in </span>
+                <span class="post_category"><a href="./category/development.html" rel="bookmark"
+                                               title="Permalink to development">[ development ]</a></span>
+                <span class="post_date">Mon 06 April 2020</span>
+                <div><span>Tags : </span>
+                </div>
+
+                <div class="entry-social">
+                    <span class="twitter"><a target="_blank" rel="nofollow"
+                                             onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;"
+                                             title="Twitter"
+                                             href="https://twitter.com/share?url=./first-post-getting-set-up-with-pelican.html&text=First Post - Getting Set Up with Pelican&via="><img
+                            src="./theme/images/icons/twitter-s.png"></a></span>
+
+                    <span class="gplus"><a target="_blank" title="Google +"
+                                           href="https://plus.google.com/share?url=./first-post-getting-set-up-with-pelican.html&hl=fr"
+                                           rel="nofollow"
+                                           onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="./theme/images/icons/google-s.png"></a></span>
+
+                    <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow"
+                                              onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"
+                                              href="https://www.facebook.com/sharer.php?u=./first-post-getting-set-up-with-pelican.html&t=First Post - Getting Set Up with Pelican"><img
+                            src="./theme/images/icons/facebook-s.png"></a></span>
+
+                    <a target="_blank" title="Linkedin"
+                       href="https://www.linkedin.com/shareArticle?mini=true&url=./first-post-getting-set-up-with-pelican.html&title=First Post - Getting Set Up with Pelican"
+                       rel="nofollow"
+                       onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="./theme/images/icons/linkedin-s.png"></a>
+
+                    <span class="mail"><a
+                            href="mailto:?subject=First Post - Getting Set Up with Pelican&amp;body=Viens découvrir un article à propos de [First Post - Getting Set Up with Pelican] sur le site de Harry. ./first-post-getting-set-up-with-pelican.html"
+                            title="Share by Email" target="_blank"><img
+                            src="./theme/images/icons/mail-s.png"></a></span>
+                </div>
+            </div>
+        </article>
+    </section>
+</article>
+
+<!-- Footer -->
+    <footer>
+        <p>
+            Blog powered by <a href="http://getpelican.com/">Pelican</a>,
+            which takes great advantage of <a href="http://python.org">Python</a>.
+            Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a
+                href="https://parbhatpuri.com/">@parbhat</a>.
+        </p>
+    </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Person">
+<head>
+        <meta charset="utf-8">
+        <!-- Site Meta Data -->
+        <title>Linux System Administration</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Harry">
+
+        <link rel="shortcut icon" href="">
+
+        <!-- schema.org -->
+        <meta itemprop="name" content="scribbles and babbles">
+        <meta itemprop="image" content="">
+        <meta itemprop="description" content="">
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+        <!-- Style Meta Data -->
+        <link rel="stylesheet" href="../theme/css/style.css" type="text/css"/>
+        <link rel="stylesheet" href="../theme/css/pygments.css" type="text/css"/>
+
+        <!-- Feed Meta Data -->
+            <link href="../feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+                  title="scribbles and babbles ATOM Feed"/>
+
+        <!-- Twitter Feed -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:image" content="">
+</head>
+
+<body>
+<!-- Sidebar -->
+<aside>
+    <!--<center><a href=".."><img id="avatar" src=""></a></center>-->
+    <h1>scribbles and babbles</h1>
+        <p>Software Engineering, mostly</p>
+    <br>
+
+
+    <nav class="nav">
+        <ul class="list-bare">
+
+                <li><a class="nav__link" href="https://pseudobabble.github.io">Blog</a></li>
+
+                <li><a class="nav__link" href="../pages/linux-system-administration.html">Linux System Administration</a></li>
+                <li><a class="nav__link" href="../pages/python-standard-library.html">Python Standard Library</a></li>
+
+        </ul>
+    </nav>
+
+    <p class="social">
+                <a href="https://www.linkedin.com/in/harry-johnson-7044b330/" target="_blank"><img
+                        src="../theme/images/icons/linkedin.png"></a>
+                <a href="https://github.com/pseudobabble" target="_blank"><img
+                        src="../theme/images/icons/github.png"></a>
+            <a href="../feeds/all.atom.xml" rel="alternate">
+                <img src="../theme/images/icons/rss.png"></a>
+    </p>
+
+        <h2>Categories</h2>
+        <ul class="navbar">
+                <li><a
+                        href="../category/development.html">development</a></li>
+                <li><a
+                        href="../category/development-f.html">development, f#</a></li>
+        </ul>
+
+
+</aside>
+
+<!-- Content -->
+<article>
+    <section id="content" class="body">
+
+        <h1>Linux System Administration</h1>
+<h2>Process Management</h2>
+<h3>Investigating Processes</h3>
+<p>Certain shell variables hold process information.</p>
+<p><code>$$</code> contains the PID (process id) of the current process.</p>
+<div class="highlight"><pre><span></span><code><span class="err">echo $$</span>
+</code></pre></div>
+
+
+<p><code>$PPID</code> contains the PID of the <strong>parent process</strong> (the PPID), the process which spawned the current process.</p>
+<div class="highlight"><pre><span></span><code><span class="err">echo $PPID</span>
+</code></pre></div>
+
+
+<p>Check the current PID, start a new bash process, and then verify that the PPID of that new bash process is the PID of the process from which the current process was spawned.</p>
+<div class="highlight"><pre><span></span><code><span class="err">echo $$;</span>
+<span class="err">bash;</span>
+<span class="err">echo $PPID;</span>
+</code></pre></div>
+
+
+<p>Processes are created in 2 stages: fork, and exec. The spawning process first creates a copy of itself (the fork), then executes <code>exec</code> to replace the fork. <code>exec</code> can replace the current process with the command that it executes.</p>
+<p><code>ps</code> is a tool to examine processes. It can be invoked with various argument combinations. Two useful argument sets are <code>aux</code> and <code>fax</code>. </p>
+<p><code>aux</code>, called as <code>ps aux</code>, contains <code>a</code>, <code>u</code>, and <code>x</code>, each of which controls some aspect of the output of <code>ps</code>. <code>a</code> shows processes from all users, <code>u</code> displays the owner of the process, and <code>x</code> shows 'headless' processes, those not attached to a terminal window. The <code>f</code> of <code>ps fax</code> stands for 'forest', is short for <code>--forest</code>, and shows the process with children in a tree-like view.</p>
+<div class="highlight"><pre><span></span><code><span class="err">ps fax;</span>
+<span class="err">ps aux;</span>
+</code></pre></div>
+
+
+<p>Using <code>ps</code> with <code>grep</code> is also effective:</p>
+<div class="highlight"><pre><span></span><code><span class="err">ps fax | grep mysql</span>
+</code></pre></div>
+
+
+<p><code>pgrep</code> can be used to search for a PID by process name, though it's utility is limited when there is more than one process with the same human readable name. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="err">pgrep bash;</span>
+</code></pre></div>
+
+
+<p>Very useful for an overview is <code>top</code>. <code>top</code> is a process manager which allows ordering by CPU%, by memory %, and so on. <code>top</code> can be invoked with arguments, or used interactively. Pressing <code>h</code> while in <code>top</code> will show help for interactive use. To invoke <code>top</code> with memory use ordering, for example:</p>
+<div class="highlight"><pre><span></span><code><span class="err">top -o %MEM</span>
+</code></pre></div>
+
+
+<h3>Killing Processes</h3>
+<p>The primary way to stop a process is with <code>kill PID</code>. The <code>kill</code> command sends a signal to stop the process with PID.</p>
+<div class="highlight"><pre><span></span><code><span class="err">#kill 11025; # Don&#39;t run that unless you know what PID 11025 is!</span>
+</code></pre></div>
+
+
+<p>There is a variety of signals which can be sent to processes with kill. The list can be viewed by typing <code>kill -l</code> at the terminal.</p>
+<p><code>kill -1</code> stands for the signal <code>SIGHUP</code>, which itself stands for 'signal hang up', a holdover from the days hardwire transmission. <code>kill -1 PID</code> forces the process specified by PID to re-read it's configuration file. This may have different effects with different programs specified by PID.</p>
+<p><code>kill -15</code> stands for <code>SIGTERM</code>, which stands for 'signal terminate'. <code>SIGTERM</code> is the standard signal sent with <code>kill</code>, when used without other arguments.</p>
+<p><code>kill -9</code> is <code>SIGKILL</code>. The difference between <code>SIGTERM</code> and <code>SIGKILL</code> is that <code>SIGKILL</code> is sent to the kernel, not the process, and it cannot be countermanded. <code>SIGKILL</code> is also called the 'sure kill'. The danger with <code>SIGKILL</code> is that it does not allow the killed process to perform any end of life cleanup, which can result in invalid state if used wantonly.</p>
+<p>Processes can be suspended and resumed with <code>SIGSTOP</code> (<code>kill -19</code>) and <code>SIGCONT</code> (<code>kill -18</code>), respectively. Suspended processes remain in memory, but consume no CPU.</p>
+<p><code>pkill</code> is shorthand for finding a PID and issuing <code>kill PID</code> - it takes a process name. <code>pkill PID</code> is functionally equivalent to <code>kill $(pgrep process_name)</code>.</p>
+<p><code>killall</code> sends a <code>SIGTERM</code> to all processes with the supplied name:</p>
+<div class="highlight"><pre><span></span><code><span class="err"># killall mysql;</span>
+</code></pre></div>
+
+
+<p><code>killall</code> can be supplied with number arguments, just like <code>kill</code>, which change which signal is sent to the processes. A dangerous but sometimes necessary command is <code>killall -9 process_name</code>, which sends the <code>SIGKILL</code> signal to all processes named by process<sub>name</sub>.</p>
+<p>Processes can be killed from inside the <code>top</code> manager, by pressing <code>k</code> inside the <code>top</code> view.</p>
+<h3>Background Processes</h3>
+<p>Background jobs can be seen with the <code>jobs</code> commmand.</p>
+<div class="highlight"><pre><span></span><code><span class="err">jobs</span>
+</code></pre></div>
+
+
+<p><code>CTRL-Z</code> <strong><em>*suspends a process, sending it to the background</em></strong>*, and halting it's operation. This is done by sending a <code>SIGSTOP</code> to the process. This could equally be accomplished with <code>kill -19</code> - <code>SIGSTOP</code>.</p>
+<p>Starting a process with the <code>&amp;</code> starts the process in the background, which can be quite handy:</p>
+<div class="highlight"><pre><span></span><code><span class="err">sudo service apache2 restart &amp;</span>
+</code></pre></div>
+
+
+<p>Using the <code>&amp;</code>, we can restart Apache in the background, and if we dont redirect the standard out and error, they will be displayed on the terminal, without preventing further typing.</p>
+<p><code>jobs -p</code> will show the PIDs of the background jobs, as opposed to their command names.</p>
+<p>The <code>fg</code> command brings a background job to the foreground - it can take a number, and bring that many jobs to the foreground:</p>
+<div class="highlight"><pre><span></span><code><span class="err">fg 3</span>
+</code></pre></div>
+
+
+<p>The <code>bg</code> command <strong><em>*restarts suspended background jobs</em></strong>*. It is a counterpart to <code>CTRL-Z</code>, as well as <code>fg</code>. <code>bg</code> can take a job number, which is usually given as <code>[NUM]+ Stopped [CMD NAME]</code> when viewing/backgrounding a process.</p>
+<h3>Scheduling Jobs</h3>
+<h4>One Time Jobs</h4>
+<p>Basic, one time scheduling can be achieved with <code>at</code>. Calling <code>at</code> will drop into a terminal based input, where one can define the command to be executed at the appointed time.</p>
+<div class="highlight"><pre><span></span><code><span class="err">at 09:00;</span>
+</code></pre></div>
+
+
+<p><code>atq</code> allows us to query jobs scheduled with <code>at</code>. <code>at -l</code> can also be used:</p>
+<div class="highlight"><pre><span></span><code><span class="err">atq;</span>
+<span class="err">at -l;</span>
+</code></pre></div>
+
+
+<p><code>at</code> understands some English too, and if you don't specify the time, will assume you meant <strong>the current time</strong>, plus the qualifier:</p>
+<div class="highlight"><pre><span></span><code><span class="err">at next monday;</span>
+<span class="err">atq;</span>
+</code></pre></div>
+
+
+<p><code>atrm</code> can remove jobs from the <code>at</code> queue.</p>
+<div class="highlight"><pre><span></span><code><span class="err">atrm 2;</span>
+</code></pre></div>
+
+
+<p>Users can be permitted to use <code>at</code> by listing them in the file <code>/etc/at.allow</code>, and prevented by listing them in <code>/etc/at.deny</code>.</p>
+<h4>Repeated Jobs</h4>
+<p><code>cron</code> is the well known command for scheduling jobs. Cron is incredibly useful, but as with all timing, it is important to get it right.</p>
+<p><code>crontab</code> is both a command, and the name of the configuration file. Every user can have their own <code>crontab</code>. The <code>crontab</code> format is five fields:</p>
+<ul>
+<li>minute</li>
+<li>hour</li>
+<li>day of month</li>
+<li>month</li>
+<li>day of week</li>
+</ul>
+<p>A <code>*</code> in any field means any value in that field.</p>
+<p>One line in a <code>crontab</code> file looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="err">15 09 * 02 * python /path/to/script.py</span>
+</code></pre></div>
+
+
+<p>Instead of scheduling using the five fields mentioned above, it is possible to schedule with some shorthand value:</p>
+<ul>
+<li><code>@reboot</code></li>
+<li><code>@yearly</code></li>
+<li><code>@annually</code></li>
+<li><code>@monthly</code></li>
+<li><code>@daily</code></li>
+<li><code>@weekly</code></li>
+<li><code>@hourly</code></li>
+<li><code>@midnight</code></li>
+</ul>
+<p>The crontab file should not be edited directly - there is a dedicated edit mode which will use the text editor defined in the <code>EDITOR</code> or <code>VISUAL</code> environment variables. The edit mode is initiated with <code>crontab -e</code>, and the cron table can be viewed with <code>crontab -l</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="err">crontab -l;</span>
+<span class="err">crontab -e;</span>
+</code></pre></div>
+
+
+<p>The crontab file is at <code>/etc/crontab</code>, and contains the <code>crontab</code> entries. The various period directories at <code>/etc/cron.*</code> contain the tasks to be executing with that periodicity, ie, <code>/etc/cron.daily</code>). There is one special directory, <code>/etc/cron.d</code>, for cases which need more control than the standard options.</p>
+<h2>Login Logging</h2>
+<p>Various log files can be used to track logins:</p>
+<ul>
+<li><code>/var/log/wtmp</code></li>
+<li><code>/var/log/btmp</code></li>
+<li><code>/var/log/lastlog</code></li>
+<li><code>/var/run/utmp</code></li>
+</ul>
+<p>The <code>who</code> command shows the currently logged in users, by reading the <code>/var/run/utmp</code> file:</p>
+<div class="highlight"><pre><span></span><code><span class="err">who</span>
+</code></pre></div>
+
+
+<p>The <code>last</code> command shows a list of logins, read from the <code>/var/log/wtmp</code> file:</p>
+<div class="highlight"><pre><span></span><code><span class="err">last</span>
+</code></pre></div>
+
+
+<p>The <code>last</code> command will also show reboots from that file, and one can specifically ask to see reboots:</p>
+<div class="highlight"><pre><span></span><code><span class="err">last reboot</span>
+</code></pre></div>
+
+
+<p>The <code>lastlog</code> command reads from the <code>/var/log/lastlog</code> file, and shows the last login time of each user:</p>
+<div class="highlight"><pre><span></span><code><span class="err">lastlog | tail</span>
+</code></pre></div>
+
+
+<p>The <code>lastb</code> command displays the contents of <code>/var/log/btmp</code>, which is updated on incorrect password attempts. <strong><em>*This file does not log failed <code>ssh</code> attempts.</em></strong>*</p>
+<div class="highlight"><pre><span></span><code><span class="err">lastb;</span>
+</code></pre></div>
+
+
+<p>If the file is not present, you can enable bad login logging by creating it.</p>
+<div class="highlight"><pre><span></span><code><span class="err">touch /var/log/btmp;</span>
+</code></pre></div>
+
+
+<p>Failed superuser (<code>su</code>)and <code>ssh</code> login attempts will go to either <code>/var/log/secure</code>, or <code>/var/log/auth.log</code>, depending on the distribution. It is possible to create a custom log file, and direct failed superuser and <code>ssh</code> logins there:</p>
+<div class="highlight"><pre><span></span><code><span class="err">cd syslog_dir;</span>
+<span class="err">echo &quot;auth.*,authpriv.*    /path/to/custom.log&quot; &gt;&gt; syslog.conf</span>
+</code></pre></div>
+
+
+<h1>Syslog Daemon and <code>logger</code></h1>
+<p><code>syslogd</code> was the original system logger daemon. <code>rsyslogd</code> ('reliable <code>syslog</code>') is the backwards compatible, upgraded system logger. It uses <code>/etc/rsyslogd.conf</code>. There is some terminology necessary to understand <code>rsyslogd</code> configuration:</p>
+<ul>
+<li><code>facility</code>: where the message comes from</li>
+<li><code>priority</code>: how important/severe is the case</li>
+<li><code>action</code>: what to do with the message</li>
+</ul>
+<p>Every line in the <code>.conf</code> file is an instruction on how to log something, using the terms listed above.</p>
+<p><code>rsyslog</code> has modules, which can be used to expand the functionality of the tool, for example, by logging to a database. <code>man rsyslog.conf</code>, and <code>man rsyslogd</code> contain plenty of information.</p>
+<p>Facilities, as listed above, are the sources from which log messages can be drawn. These include:</p>
+<ul>
+<li><code>auth</code></li>
+<li><code>authpriv</code></li>
+<li><code>cron</code></li>
+<li><code>daemon</code></li>
+<li><code>ftp</code></li>
+<li><code>kern</code></li>
+<li><code>lpr mail</code></li>
+<li><code>mark</code> (internal use)</li>
+<li><code>news</code></li>
+<li><code>syslog</code></li>
+<li><code>user</code></li>
+<li><code>uucp</code></li>
+<li><code>local0-7</code></li>
+</ul>
+<p>The difference between <code>auth</code> and <code>authpriv</code> is that <code>authpriv</code> denotes <strong><em>*non-system authorization</em></strong>* messages, whereas <code>auth</code> denotes authorization and authentication messages. <code>authpriv</code> can be configured with restricted permissions to log messages which may contain sensitive data.</p>
+<p>You may notice <code>local0-7</code>. There are 8 facilities <code>0-7</code>, which are available to be configured for attached devices, or networked devices which support logging to syslog.</p>
+<p>Log messages have priorities, here listed in ascending order:</p>
+<ul>
+<li><code>debug</code></li>
+<li><code>info</code></li>
+<li><code>notice</code></li>
+<li><code>warning</code></li>
+<li><code>err</code></li>
+<li><code>crit</code></li>
+<li><code>alert</code></li>
+<li><code>emerg</code></li>
+</ul>
+<p>Choosing a severity level will automatically log any messages with a higher severity level. Adding <code>=</code>, will restrict the reported messages to exactly the severity specified (eg <code>=warning</code>). <code>.none</code> will prevent the facility to which it is applied from being reported.</p>
+<p>The last component, actions, define what is done with the messages reported from facilities. The default action simply sends a message to the listed username. Any action ca be preceded with a <code>-</code> to prevent the log file from being synced after the message. The available actions are:</p>
+<ul>
+<li><code>root, myuser</code> -&gt; comma separated list of users</li>
+<li><code>*</code>            -&gt; all users</li>
+<li><code>/</code>            -&gt; file (printer, console, tty, etc)</li>
+<li><code>-/</code>           -&gt; file (but don't sync after writing)</li>
+<li><code>|</code>            -&gt; named pipe</li>
+<li><code>@</code>            -&gt; another syslog server hostname</li>
+</ul>
+<p>An simple example configuration in <code>/etc/rsyslog.conf</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="err">local0.emerg  /var/log/attached_device_emergency</span>
+<span class="err">cron.=debug   myuser</span>
+<span class="err">syslog.*      /var/log/all_syslog_messages</span>
+</code></pre></div>
+
+
+<p>After changing the configuration, restart the service:</p>
+<div class="highlight"><pre><span></span><code><span class="err">sudo service rsyslog restart;</span>
+</code></pre></div>
+
+
+<p>The <code>logger</code> command is useful for generating test messages for the logging configuration. It can also be used in scripts to actually log.</p>
+<div class="highlight"><pre><span></span><code><span class="err">logger -p local0.notice &quot;some information&quot;;</span>
+</code></pre></div>
+
+
+<p><code>-p</code> is a flag to set the priority. More information can be found with <code>man logger</code>.</p>
+<p>The way to watch logs in real time is with the <code>tail</code> command. <code>tail -f FILENAME</code> is similar to calling <code>tail FILENAME</code> each time a new log line is added to the file - it is a 'live updating' <code>tail</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="err">tail -f /var/log/postgresql/postgresql-11-main.log;</span>
+</code></pre></div>
+
+
+<p>Similarly, you can use the <code>watch</code> command. Preceding a command with <code>watch</code> will repeat the command, by default evey 2 seconds:</p>
+<div class="highlight"><pre><span></span><code><span class="err">watch whoami;</span>
+</code></pre></div>
+
+
+<p>Log file sizes will eventually become cumbersome. It is common practice to 'rotate' log files, which means compressing and removing intermediate logs to keep the current log file manageable. The command for this is <code>logrotate</code>. The main <code>logrotate</code> configuration file is at <code>/etc/logrotate.conf</code>, and configuration for individual applications is at <code>/etc/logrotate.d/APPLICATION</code>.</p>
+<h2>Resource Monitoring</h2>
+<h3><code>top</code></h3>
+<p><code>top</code> is the standard way to monitor resources. <code>top</code> is an interactive monitoring tool which can show a variety of metrics. Among the ways <code>top</code> can be used are by pressing <code>k</code>, <code>t</code>, or <code>m</code>. <code>k</code> will cause <code>top</code> to request a PID to <code>kill</code>. <code>m</code> and <code>t</code> will toggle between displaying memory and task information. <code>top</code> can be called with arguments to customise its scope:</p>
+<div class="highlight"><pre><span></span><code><span class="err">top p 1 p 345;</span>
+</code></pre></div>
+
+
+<p>The command above will restrict <code>top</code> to displaying information about processes with PIDs 1 and 345. More information can be found with <code>man top</code>.</p>
+<p>Other tools for resource monitoring include <code>nmon</code> and <code>htop</code>. Both have a similar display to <code>top</code>, with more styling.</p>
+<h2>Network Management</h2>
+<h1>Concepts</h1>
+<p>When talking about networking, it is necessary to have a model to contain the discussion. There are two commonly used models: the TCP/IP model and the Open Systems Integration (OSI) model.</p>
+<h2>TCP/IP Model</h2>
+<p>The TCP/IP model has 4 layers:</p>
+<ul>
+<li>Network Access Layer</li>
+<li>Network Layer</li>
+<li>Host-to-Host Layer</li>
+<li>Application Layer</li>
+</ul>
+<p>I prefer the more detailed OSI model, but the TCP/IP model roughly maps to the OSI model.   </p>
+<h2>OSI Model</h2>
+<p>The OSI model has 7 layers:</p>
+<ul>
+<li>Physical</li>
+<li>Data Link</li>
+<li>Network</li>
+<li>Transport</li>
+<li>Session</li>
+<li>Presentation</li>
+<li>Application</li>
+</ul>
+<h3>Physical Layer (Layer 1)</h3>
+<p>The physical layer concerns things you might associate with electrical engineering: voltage, electrical signals, types of cable and connector, and so on. While this layer provides the foundation of the others, it is not specifically relevant to system administration.</p>
+<h3>Data Link Layer (Layer 2)</h3>
+<p>This is the layer of bridges, switches, frames and MAC addresses - matters which sit <strong>just above</strong> the physical layer. Ethernet and Wireless device management occurs mostly at this layer, with protocols like the Address Resolution Protocol (<code>arp</code>) operating at this level. <code>ifconfig</code> (or the newer <code>ip</code> command) can give some information about the machine status with regard to the devices and protocols of this layer.</p>
+<h3>Network Layer (Layer 3)</h3>
+<p>The network layer mainly concerns <code>ip</code> protocol packets. Hosts at this layer are identified by a 32 bit IP address. Other protocols operate on this layer, such as <code>icmp</code>. The <code>/etc/protocols</code> file has information on the protocols operative.</p>
+<h3>Transport Layer (Layer 4)</h3>
+<p>The TCP/IP model calls this the 'host-to-host' layer. The protocols operative at this layer are <code>tcp</code> and <code>udp</code>.</p>
+<h3>Session, Presentation, Application Layers (Layers 5, 6, 7)</h3>
+<p>These layers concern the handling of network data once it has left the Transport Layer, and so are more the concern of application security and networking.</p>
+<h2>Casting</h2>
+<p>Along with the type of protocol (<code>DCHP</code>, <code>ARP</code>, <code>TCP/IP</code>, <code>BOOTP</code>, etc), the type of cast is an important feature of network communication. There are 4 types of cast:</p>
+<ul>
+<li>Unicast: destined for exactly one recipient</li>
+<li>Multicast: destined for a group of recipients</li>
+<li>Broadcast: destined for every receiver on the network</li>
+<li>Anycast: goes to the geographically nearest of a defined group.</li>
+</ul>
+<h2>Network Interface Configuration</h2>
+<p><code>/etc/network/interfaces</code> is a main network interface configuration file.</p>
+<div class="highlight"><pre><span></span><code><span class="err">cat /etc/network/interfaces;</span>
+</code></pre></div>
+
+
+<p>The following configuration configures the <code>loopback</code> interface, and the <code>eth0</code> interface for DCHP (Dynamic Host Configuration Protocol):</p>
+<div class="highlight"><pre><span></span><code><span class="err"># The loopback network interface</span>
+<span class="err">auto lo</span>
+<span class="err">iface lo inet loopback</span>
+<span class="err">auto eth0</span>
+<span class="err">iface eth0 inet dhcp</span>
+</code></pre></div>
+
+
+<p>The following configuration is how <code>/etc/network/interfaces</code> might look configured for a static ip address:</p>
+<div class="highlight"><pre><span></span><code><span class="err">auto eth0</span>
+<span class="err">iface eth0 inet static</span>
+<span class="err">address 10.42.189.198</span>
+<span class="err">broadcast 10.42.189.207</span>
+<span class="err">netmask 255.255.255.240</span>
+<span class="err">gateway 10.42.189.193</span>
+</code></pre></div>
+
+
+<p><code>ifup</code> and <code>ifdown</code> are used to activate and deactivate network interfaces. Network interfaces <strong>should</strong> be deactivated before being reconfigured, but do not have to be.</p>
+<p><code>ifconfig</code> is the classic network interface configurator. Just typing <code>ifconfig</code> without arguments, will show the list of active network interfaces.</p>
+<div class="highlight"><pre><span></span><code><span class="err">ifconfig;</span>
+</code></pre></div>
+
+
+<p><code>ifconfig</code> can be supplied with the name of a network interface, which restricts the view to that interface:</p>
+<div class="highlight"><pre><span></span><code><span class="err">ifconfig eth0; # assuming your interface is called eth0...</span>
+</code></pre></div>
+
+
+<p><code>ifconfig</code> can activate and deactive the network interface. The difference from <code>ifup</code> and <code>ifdown</code> is that <code>ifconfig INTERFACE_NAME up/down</code> will deactivate/reactivate the interface <strong>with the current configuration</strong>, whereas <code>ifup/down</code> will reload the configuration from file, including any new configuration.</p>
+<div class="highlight"><pre><span></span><code><span class="err">ifconfig eth0 down;</span>
+<span class="err">ifconfig eth0 up;</span>
+<span class="err">ifconfig eth0;</span>
+</code></pre></div>
+
+
+<p><code>ifconfig</code> can set IP addresses and <code>MAC</code> addresses, which are retained until <code>ifdown/up</code> or reboot:</p>
+<div class="highlight"><pre><span></span><code><span class="err">ifconfig; # Check initial configuration</span>
+<span class="err">ifconfig eth0 192.168.55.22 netmask 255.255.255.0.0; # Set the ip</span>
+<span class="err">ifconfig eth0 hw ether 00:42:42:42:42:42; # Set the MAC</span>
+<span class="err">ifconfig; # Check the changes</span>
+<span class="err">ifdown &amp;&amp; ifup; # Reset the changes</span>
+<span class="err">ifconfig; # Check the reset</span>
+</code></pre></div>
+
+
+<p>On some systems, the <code>ifconfig</code> command has been deprecated and replaced with the <code>ip</code> command, which is broadly similar, but has some different arguments and functionality:</p>
+<div class="highlight"><pre><span></span><code><span class="err">ip addr show; # Same as ifconfig</span>
+<span class="err">ip addr show eth0; # Same as ifconfig eth0</span>
+</code></pre></div>
+
+
+<p><code>dhclient</code> is a daemon which manages the client side of the Dynamic Host Configuration Protocol (DHCP). DHCP enables a host to receive a local IP from a DHCP server. Typically your home router is a DCHP server for your local wifi network. If in use, <code>dhclient</code> will override any local ip configurations set with <code>ifconfig</code> or <code>ip</code> when it receives a new ip from teh DHCP server.</p>
+<p>Every host (machine) is given a <code>hostname</code>, and often positioned in a DNS namespace, to give a fully qualified domain name, for example, 'blog.this.com'. On Debian and Debian-derived distros, the hostname can be found (and set) in <code>/etc/hostname</code>.</p>
+<p>The <code>hostname</code> can be temporarily set using <code>hostname NEW_HOSTNAME</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="err">cat /etc/hostname; # Read hostname from file</span>
+<span class="err">hostname some-new-hostname; # Temporarily set a new hostname</span>
+<span class="err">hostname; # Check the new hostname</span>
+</code></pre></div>
+
+
+<p><code>sysctl</code> can be used to read and write the <code>hostname</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="err">sysctl kernel.hostname; # What is the current hostname?</span>
+<span class="err">sysctl kernel.hostname = another-hostname; # Set a different hostname</span>
+<span class="err">sysctl kernel.hostname; # Check using sysctl</span>
+<span class="err">hostname; # Check using hostname command</span>
+</code></pre></div>
+
+
+<p>The <code>arp</code> command can be used to manipulate the system ARP cache - the list of machines recently communicated with. ARP is the Address Resolution Protocol, a Data Link (2) Layer protocol, which enables IP addresses to be resolved to MAC (Media Access Control) addresses. IP addresses identify a host on the Network (3) Layer, MAC addresses identify a machine on the Data Link (2) Layer. </p>
+<p>List the hosts in the ARP cache with:</p>
+<div class="highlight"><pre><span></span><code><span class="err">arp; # Standard</span>
+<span class="err">arp -a; # Alternative &#39;BSD style&#39; no columns view</span>
+</code></pre></div>
+
+
+<p>Remove an ARP cache entry with:</p>
+<div class="highlight"><pre><span></span><code><span class="err">arp -d IP_OR_HOSTNAME; # Requires root</span>
+</code></pre></div>
+
+
+<p>The <code>route</code> command will show the machine's local routing table, as will <code>netstat -r</code>. <code>route</code> also allows one to manipulate the routing table:</p>
+<div class="highlight"><pre><span></span><code><span class="err">route add default gw SOME_IP; # Add a default gateway</span>
+</code></pre></div>
+
+
+<p><code>man route</code> will give more information about the other features of <code>route</code>.</p>
+<p><code>ping</code> is an extremely useful tool for checking connection status. <code>ping</code> sends Internet Control Message Protocol (ICMP) packets to the target IP, and reports back any errors, packet loss, network latency, etc. It is almost certainly the fastest way to check whether a machine is connected to a network.</p>
+<div class="highlight"><pre><span></span><code><span class="err">ping 192.168.0.1;</span>
+</code></pre></div>
+
+
+<h2><code>ssh</code></h2>
+<p><code>ssh</code> is the Secure Shell. <code>ssh</code> uses public-key cryptography to authenticate with a remote host and provide a secure and private connection with that host.</p>
+<p><code>/etc/ssh/</code> is where much of the <code>ssh</code> configuration is to be found. Each user also has a <code>.ssh/</code> directory, in which a file named <code>config</code> can be placed to define the connection configuration for specified remote hosts.</p>
+<p>A <code>~/.ssh/config</code> file might look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">Host</span> <span class="n">host1</span>
+    <span class="n">HostName</span> <span class="k">SOME</span><span class="p">.</span><span class="n">IP</span><span class="p">.</span><span class="n">HERE</span>
+    <span class="k">User</span> <span class="k">some</span><span class="o">-</span><span class="k">user</span>
+    <span class="n">Port</span> <span class="mi">22</span> <span class="o">#</span> <span class="n">usually</span>
+    <span class="n">IdentityFile</span> <span class="n">path</span><span class="o">/</span><span class="k">to</span><span class="o">/</span><span class="n">ssh</span><span class="o">/</span><span class="k">key</span><span class="o">/</span><span class="n">here</span>
+
+<span class="k">Host</span> <span class="n">host2</span>
+    <span class="n">HostName</span> <span class="n">ANOTHER</span><span class="p">.</span><span class="n">IP</span><span class="p">.</span><span class="n">HERE</span>
+    <span class="k">User</span> <span class="n">a</span><span class="o">-</span><span class="n">different</span><span class="o">-</span><span class="k">user</span>
+    <span class="n">Port</span> <span class="n">specify</span><span class="o">-</span><span class="n">a</span><span class="o">-</span><span class="n">different</span><span class="o">-</span><span class="n">port</span>
+</code></pre></div>
+    </section>
+</article>
+
+<!-- Footer -->
+    <footer>
+        <p>
+            Blog powered by <a href="http://getpelican.com/">Pelican</a>,
+            which takes great advantage of <a href="http://python.org">Python</a>.
+            Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a
+                href="https://parbhatpuri.com/">@parbhat</a>.
+        </p>
+    </footer>
+
+
+</body>
+</html>
