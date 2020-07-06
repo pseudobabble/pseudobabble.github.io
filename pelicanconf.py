@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
-AUTHOR = 'me'
+AUTHOR = 'Harry'
 SITENAME = 'scribbles and babbles'
-SITEURL = ''
+SITEURL = 'https://pseudobabble.github.io'
 
 PATH = 'content'
 
@@ -19,17 +19,30 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-# Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
-
-# Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
-
 DEFAULT_PAGINATION = 10
 
+THEME = 'resume-blue'
+
+# pelican-blue params
+SOCIAL = (('linkedin', 'https://www.linkedin.com/in/harry-johnson-7044b330/'),
+          ('github', 'https://github.com/pseudobabble'),
+          #          ('twitter', 'https://twitter.com/username'),
+          )
+
+SIDEBAR_DIGEST = 'Software Engineering, mostly'
+
+# FAVICON = 'url-to-favicon'
+
+DISPLAY_PAGES_ON_MENU = True
+
+# TWITTER_USERNAME = 'twitter-user-name'
+
+MENUITEMS = (('Blog', SITEURL),)
+
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+# RELATIVE_URLS = True
+
+
+# Plugins
+PLUGIN_PATHS = ['../plugins']
+PLUGINS = ['pelican_javascript']

@@ -1,1 +1,4 @@
 venv/
+publish.sh
+*.md~
+__pycache__/
