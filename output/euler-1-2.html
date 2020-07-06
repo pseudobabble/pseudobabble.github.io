@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Person">
+<head>
+            <meta charset="utf-8">
+        <!-- Site Meta Data -->
+        <title>Euler 1 & 2</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Harry">
+
+        <link rel="shortcut icon" href="">
+
+        <!-- schema.org -->
+        <meta itemprop="name" content="scribbles and babbles">
+        <meta itemprop="image" content="">
+        <meta itemprop="description" content="">
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+        <!-- Style Meta Data -->
+        <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css"/>
+
+        <!-- Feed Meta Data -->
+            <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+                  title="scribbles and babbles ATOM Feed"/>
+
+        <!-- Twitter Feed -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:image" content="">
+
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:url" content="./euler-1-2.html">
+    <meta name="twitter:title" content="scribbles and babbles ~ Euler 1 & 2">
+    <meta name="twitter:description" content="Euler 1 The first Euler problem is to get the sum of all multiples of 3 or 5 below 1000. The first thing we need is a list of the numbers below 1000, which in F# is quite simple: [1..999] Then, a function to filter the list for multiples …">
+
+    <!-- Facebook Meta Data -->
+    <meta property="og:title" content="scribbles and babbles ~ Euler 1 & 2"/>
+    <meta property="og:description" content="Euler 1 The first Euler problem is to get the sum of all multiples of 3 or 5 below 1000. The first thing we need is a list of the numbers below 1000, which in F# is quite simple: [1..999] Then, a function to filter the list for multiples …"/>
+    <meta property="og:image" content=""/>
+</head>
+
+<body>
+<!-- Sidebar -->
+<aside>
+    <!--<center><a href="."><img id="avatar" src=""></a></center>-->
+    <h1>scribbles and babbles</h1>
+        <p>Software Engineering, mostly</p>
+    <br>
+
+
+    <nav class="nav">
+        <ul class="list-bare">
+
+                <li><a class="nav__link" href="https://pseudobabble.github.io">Blog</a></li>
+
+                <li><a class="nav__link" href="./pages/linux-system-administration.html">Linux System Administration</a></li>
+                <li><a class="nav__link" href="./pages/python-standard-library.html">Python Standard Library</a></li>
+
+        </ul>
+    </nav>
+
+    <p class="social">
+                <a href="https://www.linkedin.com/in/harry-johnson-7044b330/" target="_blank"><img
+                        src="./theme/images/icons/linkedin.png"></a>
+                <a href="https://github.com/pseudobabble" target="_blank"><img
+                        src="./theme/images/icons/github.png"></a>
+            <a href="./feeds/all.atom.xml" rel="alternate">
+                <img src="./theme/images/icons/rss.png"></a>
+    </p>
+
+        <h2>Categories</h2>
+        <ul class="navbar">
+                <li><a
+                        href="./category/development.html">development</a></li>
+                <li class="active"><a
+                        href="./category/development-f.html">development, f#</a></li>
+        </ul>
+
+
+</aside>
+
+<!-- Content -->
+<article>
+    <section id="content">
+        <article>
+            <h2 class="post_title post_detail"><a href="./euler-1-2.html" rel="bookmark"
+                                                  title="Permalink to Euler 1 & 2">Euler 1 & 2</a></h2>
+            <div class="entry-content blog-post">
+                <h1>Euler 1</h1>
+<p>The first Euler problem is to get the sum of all multiples of 3 or 5 below 1000.</p>
+<p>The first thing we need is a list of the numbers below 1000, which in F# is quite simple:</p>
+<div class="highlight"><pre><span></span><code><span class="err">[1..999]</span>
+</code></pre></div>
+
+
+<p>Then, a function to filter the list for multiples of 3 or 5:</p>
+<div class="highlight"><pre><span></span><code><span class="err">let filterAndAdd listToFilter =</span>
+<span class="err">    listToFilter </span>
+<span class="err">    |&gt; List.filter mulipleOfThreeOrFive</span>
+</code></pre></div>
+
+
+<p>We define a function <code>filterAndAdd</code> which takes a <code>listToFilter</code>, and passes it straight to the <code>List.filter</code> function, which filters using the <code>multipleOfThreeOrFive</code> function, and returns the results.</p>
+<p>The <code>List.filter</code> function takes a list, and a function which returns true when applied to a list element which is to be selected, and false otherwise. </p>
+<p>The <code>multipleOfThreeOrFive</code> function exemplifies <strong>function composition</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">let</span> <span class="n">multipleOf</span> <span class="n">factor</span> <span class="n">multiple</span> <span class="o">=</span> <span class="n">multiple</span> <span class="o">%</span> <span class="n">factor</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">let</span> <span class="n">mulipleOfThreeOrFive</span> <span class="n">element</span> <span class="o">=</span> 
+    <span class="n">multipleOf</span> <span class="mi">3</span> <span class="n">element</span> <span class="o">||</span> <span class="n">multipleOf</span> <span class="mi">5</span> <span class="n">element</span>
+</code></pre></div>
+
+
+<p>The <code>multipleOf</code> function takes two arguments <code>factor</code> and <code>multiple</code> returns true if the multiple divided by the factor is 0, and false otherwise. </p>
+<p>The <code>multipleOfThreeOrFive</code> function takes an <code>element</code> (the multiple) and passes to it the <code>multipleOf</code> function along with either 3 or 5 as the factor, on either side of a bitwise OR, returning true if the <code>element</code> is a multiple of either 3 or 5.</p>
+<p>Next, we need a function to sum a list of integers:</p>
+<div class="highlight"><pre><span></span><code><span class="err">let sumList list = List.reduce (+) list</span>
+</code></pre></div>
+
+
+<p><code>sumList</code> takes a list, and reduces it over the <code>+</code> operator.</p>
+<p>Now we can pipe the result of <code>multipleOfThreeOrFive</code> to <code>sumList</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="err">let filterAndAdd listToFilter =</span>
+<span class="err">    listToFilter </span>
+<span class="err">    |&gt; List.filter mulipleOfThreeOrFive</span>
+<span class="err">    |&gt; sumList</span>
+</code></pre></div>
+
+
+<p>Now create the entry point, pass in the initial list to be printed:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[&lt;EntryPoint&gt;]</span>
+<span class="na">let main argv</span> <span class="o">=</span><span class="s"></span>
+<span class="s">  printfn &quot;Euler 1: %i&quot; (EulerOne.filterAndAdd [1..999])</span>
+<span class="s">  0</span>
+</code></pre></div>
+
+
+<p><a id="orgb0831bb"></a></p>
+<h1>Euler 2</h1>
+<p>Euler problem 2 is to sum the evens in the Fibbonaci up to 4,000,000.</p>
+<p>First we need to generate a Fibbonaci sequence. I stole this from someone on stackoverflow:</p>
+<div class="highlight"><pre><span></span><code><span class="err">// generate an infinite Fibonacci sequence</span>
+<span class="err">// from: https://stackoverflow.com/questions/2845744/generating-fibonacci-series-in-f</span>
+<span class="err">let fibSeq =    </span>
+<span class="err">    let rec fibseq n1 n2 = // recursive fibseq takes 2 params</span>
+<span class="err">        seq { let n0 = n1 + n2 // define sequence and calculate start</span>
+<span class="err">              yield n0 // yield start</span>
+<span class="err">              yield! fibseq n0 n1 } // merge with seq generated by fibseq</span>
+<span class="err">        seq { yield 1I ; yield 1I ; yield! (fibseq 1I 1I) } // return seq whose t3 is fibseq(t1, t2)</span>
+</code></pre></div>
+
+
+<p>Its pretty nice. I will let you read the stackoverflow for that one.</p>
+<p>The rest is much as with Problem 1, filtering and summing. The only issue I encountered was the requirement to handle <code>BigIntegers</code>, which I solved by specifying types and parsing wherever required:</p>
+<div class="highlight"><pre><span></span><code><span class="o">//</span>  <span class="n">filter</span> <span class="k">for</span> <span class="n">evens</span><span class="p">,</span> <span class="n">take</span> <span class="n">the</span> <span class="k">first</span> <span class="k">limit</span> <span class="n">numbers</span> <span class="k">in</span> <span class="n">the</span> <span class="n">sequence</span><span class="p">,</span> <span class="k">and</span> <span class="k">convert</span> <span class="k">to</span> <span class="n">a</span> <span class="n">list</span>
+<span class="n">let</span> <span class="n">fibGen</span> <span class="p">(</span><span class="k">limit</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">=</span> 
+    <span class="n">fibSeq</span> 
+    <span class="o">|&gt;</span> <span class="n">Seq</span><span class="p">.</span><span class="n">filter</span> <span class="p">(</span><span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="n">BigInteger</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">=</span> <span class="n">BigInteger</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="o">|&gt;</span> <span class="n">Seq</span><span class="p">.</span><span class="n">takeWhile</span> <span class="p">(</span><span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">BigInteger</span><span class="p">(</span><span class="k">limit</span><span class="p">)))</span>
+    <span class="o">|&gt;</span> <span class="n">Seq</span><span class="p">.</span><span class="n">toList</span>
+
+<span class="n">let</span> <span class="n">fibSum</span> <span class="k">limit</span> <span class="o">=</span> 
+    <span class="n">fibGen</span> <span class="k">limit</span>
+    <span class="o">|&gt;</span> <span class="n">sumList</span>
+</code></pre></div>
+
+
+<p>The whole file looks like:</p>
+<div class="highlight"><pre><span></span><code><span class="k">open</span> <span class="k">System</span>
+<span class="k">open</span> <span class="k">System</span><span class="p">.</span><span class="n">Numerics</span>
+
+<span class="n">module</span> <span class="n">EulerOne</span> <span class="o">=</span>
+
+    <span class="n">let</span> <span class="n">sumList</span> <span class="n">list</span> <span class="o">=</span> <span class="n">List</span><span class="p">.</span><span class="n">reduce</span> <span class="p">(</span><span class="o">+</span><span class="p">)</span> <span class="n">list</span>
+
+    <span class="n">let</span> <span class="n">multipleOf</span> <span class="n">factor</span> <span class="n">multiple</span> <span class="o">=</span> <span class="n">multiple</span> <span class="o">%</span> <span class="n">factor</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">let</span> <span class="n">mulipleOfThreeOrFive</span> <span class="n">element</span> <span class="o">=</span> 
+            <span class="n">multipleOf</span> <span class="mi">3</span> <span class="n">element</span> <span class="o">||</span> <span class="n">multipleOf</span> <span class="mi">5</span> <span class="n">element</span>
+
+    <span class="n">let</span> <span class="n">filterAndAdd</span> <span class="n">listToFilter</span> <span class="o">=</span>
+            <span class="n">listToFilter</span> 
+            <span class="o">|&gt;</span> <span class="n">List</span><span class="p">.</span><span class="n">filter</span> <span class="n">mulipleOfThreeOrFive</span>
+            <span class="o">|&gt;</span> <span class="n">sumList</span>
+
+
+<span class="n">module</span> <span class="n">EulerTwo</span> <span class="o">=</span>
+
+    <span class="n">let</span> <span class="n">sumList</span> <span class="p">(</span><span class="n">list</span><span class="p">:</span><span class="n">List</span><span class="o">&lt;</span><span class="n">BigInteger</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">:</span><span class="n">BigInteger</span> <span class="o">=</span> <span class="n">List</span><span class="p">.</span><span class="k">sum</span> <span class="n">list</span>
+
+    <span class="o">//</span> <span class="n">generate</span> <span class="n">an</span> <span class="n">infinite</span> <span class="n">Fibonacci</span> <span class="n">sequence</span>
+    <span class="o">//</span> <span class="k">from</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">stackoverflow</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">questions</span><span class="o">/</span><span class="mi">2845744</span><span class="o">/</span><span class="n">generating</span><span class="o">-</span><span class="n">fibonacci</span><span class="o">-</span><span class="n">series</span><span class="o">-</span><span class="k">in</span><span class="o">-</span><span class="n">f</span>
+    <span class="n">let</span> <span class="n">fibSeq</span> <span class="o">=</span>    
+        <span class="n">let</span> <span class="n">rec</span> <span class="n">fibseq</span> <span class="n">n1</span> <span class="n">n2</span> <span class="o">=</span> <span class="o">//</span> <span class="k">recursive</span> <span class="n">fibseq</span> <span class="n">takes</span> <span class="mi">2</span> <span class="n">params</span>
+            <span class="n">seq</span> <span class="err">{</span> <span class="n">let</span> <span class="n">n0</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span> <span class="o">//</span> <span class="n">define</span> <span class="n">sequence</span> <span class="k">and</span> <span class="n">calculate</span> <span class="k">start</span>
+              <span class="n">yield</span> <span class="n">n0</span> <span class="o">//</span> <span class="n">yield</span> <span class="k">start</span>
+              <span class="n">yield</span><span class="o">!</span> <span class="n">fibseq</span> <span class="n">n0</span> <span class="n">n1</span> <span class="err">}</span> <span class="o">//</span> <span class="n">merge</span> <span class="k">with</span> <span class="n">seq</span> <span class="k">generated</span> <span class="k">by</span> <span class="n">fibseq</span>
+        <span class="n">seq</span> <span class="err">{</span> <span class="n">yield</span> <span class="mi">1</span><span class="n">I</span> <span class="p">;</span> <span class="n">yield</span> <span class="mi">1</span><span class="n">I</span> <span class="p">;</span> <span class="n">yield</span><span class="o">!</span> <span class="p">(</span><span class="n">fibseq</span> <span class="mi">1</span><span class="n">I</span> <span class="mi">1</span><span class="n">I</span><span class="p">)</span> <span class="err">}</span> <span class="o">//</span> <span class="k">return</span> <span class="n">seq</span> <span class="n">whose</span> <span class="n">t3</span> <span class="k">is</span> <span class="n">fibseq</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span>
+
+
+    <span class="o">//</span>  <span class="n">filter</span> <span class="k">for</span> <span class="n">evens</span><span class="p">,</span> <span class="n">take</span> <span class="n">the</span> <span class="k">first</span> <span class="k">limit</span> <span class="n">numbers</span> <span class="k">in</span> <span class="n">the</span> <span class="n">sequence</span><span class="p">,</span> <span class="k">and</span> <span class="k">convert</span> <span class="k">to</span> <span class="n">a</span> <span class="n">list</span>
+    <span class="n">let</span> <span class="n">fibGen</span> <span class="p">(</span><span class="k">limit</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">=</span> 
+        <span class="n">fibSeq</span> 
+        <span class="o">|&gt;</span> <span class="n">Seq</span><span class="p">.</span><span class="n">filter</span> <span class="p">(</span><span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="n">BigInteger</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="o">=</span> <span class="n">BigInteger</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="o">|&gt;</span> <span class="n">Seq</span><span class="p">.</span><span class="n">takeWhile</span> <span class="p">(</span><span class="n">fun</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">BigInteger</span><span class="p">(</span><span class="k">limit</span><span class="p">)))</span>
+        <span class="o">|&gt;</span> <span class="n">Seq</span><span class="p">.</span><span class="n">toList</span>
+
+    <span class="n">let</span> <span class="n">fibSum</span> <span class="k">limit</span> <span class="o">=</span> 
+        <span class="n">fibGen</span> <span class="k">limit</span>
+        <span class="o">|&gt;</span> <span class="n">sumList</span>
+
+
+<span class="p">[</span><span class="o">&lt;</span><span class="n">EntryPoint</span><span class="o">&gt;</span><span class="p">]</span>
+<span class="n">let</span> <span class="n">main</span> <span class="n">argv</span> <span class="o">=</span>
+  <span class="n">printfn</span> <span class="ss">&quot;Euler 1: %i&quot;</span> <span class="p">(</span><span class="n">EulerOne</span><span class="p">.</span><span class="n">filterAndAdd</span> <span class="p">[</span><span class="mi">1</span><span class="p">..</span><span class="mi">999</span><span class="p">])</span>
+  <span class="n">printfn</span> <span class="ss">&quot;Euler 2: %A&quot;</span> <span class="p">(</span><span class="n">EulerTwo</span><span class="p">.</span><span class="n">fibSum</span> <span class="mi">4000000</span><span class="p">)</span>
+  <span class="mi">0</span>
+</code></pre></div>
+            </div>
+            <div class="post_list">
+                <span>By </span>
+                <a href="./author/harry.html">@Harry</a>
+                <span> in </span>
+                <span class="post_category"><a href="./category/development-f.html" rel="bookmark"
+                                               title="Permalink to development, f#">[ development, f# ]</a></span>
+                <span class="post_date">Sat 16 May 2020</span>
+                <div><span>Tags : </span>
+                </div>
+
+                <div class="entry-social">
+                    <span class="twitter"><a target="_blank" rel="nofollow"
+                                             onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;"
+                                             title="Twitter"
+                                             href="https://twitter.com/share?url=./euler-1-2.html&text=Euler 1 & 2&via="><img
+                            src="./theme/images/icons/twitter-s.png"></a></span>
+
+                    <span class="gplus"><a target="_blank" title="Google +"
+                                           href="https://plus.google.com/share?url=./euler-1-2.html&hl=fr"
+                                           rel="nofollow"
+                                           onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="./theme/images/icons/google-s.png"></a></span>
+
+                    <span class="facebook"><a target="_blank" title="Facebook" rel="nofollow"
+                                              onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"
+                                              href="https://www.facebook.com/sharer.php?u=./euler-1-2.html&t=Euler 1 & 2"><img
+                            src="./theme/images/icons/facebook-s.png"></a></span>
+
+                    <a target="_blank" title="Linkedin"
+                       href="https://www.linkedin.com/shareArticle?mini=true&url=./euler-1-2.html&title=Euler 1 & 2"
+                       rel="nofollow"
+                       onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img
+                            src="./theme/images/icons/linkedin-s.png"></a>
+
+                    <span class="mail"><a
+                            href="mailto:?subject=Euler 1 & 2&amp;body=Viens découvrir un article à propos de [Euler 1 & 2] sur le site de Harry. ./euler-1-2.html"
+                            title="Share by Email" target="_blank"><img
+                            src="./theme/images/icons/mail-s.png"></a></span>
+                </div>
+            </div>
+        </article>
+    </section>
+</article>
+
+<!-- Footer -->
+    <footer>
+        <p>
+            Blog powered by <a href="http://getpelican.com/">Pelican</a>,
+            which takes great advantage of <a href="http://python.org">Python</a>.
+            Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a
+                href="https://parbhatpuri.com/">@parbhat</a>.
+        </p>
+    </footer>
+
+
+</body>
+</html>

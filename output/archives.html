@@ -1,56 +1,111 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Person">
 <head>
-        <meta charset="utf-8" />
-        <title>scribbles and babbles</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="scribbles and babbles Atom Feed" />
+            <meta charset="utf-8">
+        <!-- Site Meta Data -->
+        <title> scribbles and babbles | Software Engineering, mostly</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Harry">
+
+        <link rel="shortcut icon" href="">
+
+        <!-- schema.org -->
+        <meta itemprop="name" content="scribbles and babbles">
+        <meta itemprop="image" content="">
+        <meta itemprop="description" content="">
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+        <!-- Style Meta Data -->
+        <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link rel="stylesheet" href="./theme/css/pygments.css" type="text/css"/>
+
+        <!-- Feed Meta Data -->
+            <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+                  title="scribbles and babbles ATOM Feed"/>
+
+        <!-- Twitter Feed -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:image" content="">
+
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:url" content="./archives.html">
+    <meta name="twitter:title" content="scribbles and babbles ~ Archives">
+    <meta name="twitter:description" content="scribbles and babbles ~ Archives du site">
+
+    <!-- Facebook Meta Data -->
+    <meta property="og:title" content="scribbles and babbles ~ Archives"/>
+    <meta property="og:description" content="scribbles and babbles ~ Archives"/>
+    <meta property="og:image" content=""/>
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">scribbles and babbles</a></h1>
-                <nav><ul>
-                    <li><a href="/pages/about-me.html">About Me</a></li>
-                    <li><a href="/category/misc.html">misc</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-<section id="content" class="body">
-<h1>Archives for scribbles and babbles</h1>
+<body>
+<!-- Sidebar -->
+<aside>
+    <!--<center><a href="."><img id="avatar" src=""></a></center>-->
+    <h1>scribbles and babbles</h1>
+        <p>Software Engineering, mostly</p>
+    <br>
 
-<dl>
-    <dt>Mon 06 April 2020</dt>
-    <dd><a href="/first-post-getting-set-up-with-pelican.html">First Post - Getting Set Up with Pelican</a></dd>
-</dl>
-</section>
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="http://python.org/">Python.org</a></li>
-                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                            <li><a href="#">You can modify those links in your config file</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
-                            <li><a href="#">You can add links in your config file</a></li>
-                            <li><a href="#">Another social link</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+    <nav class="nav">
+        <ul class="list-bare">
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
+                <li><a class="nav__link" href="https://pseudobabble.github.io">Blog</a></li>
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+                <li><a class="nav__link" href="./pages/linux-system-administration.html">Linux System Administration</a></li>
+                <li><a class="nav__link" href="./pages/python-standard-library.html">Python Standard Library</a></li>
+
+        </ul>
+    </nav>
+
+    <p class="social">
+                <a href="https://www.linkedin.com/in/harry-johnson-7044b330/" target="_blank"><img
+                        src="./theme/images/icons/linkedin.png"></a>
+                <a href="https://github.com/pseudobabble" target="_blank"><img
+                        src="./theme/images/icons/github.png"></a>
+            <a href="./feeds/all.atom.xml" rel="alternate">
+                <img src="./theme/images/icons/rss.png"></a>
+    </p>
+
+        <h2>Categories</h2>
+        <ul class="navbar">
+                <li><a
+                        href="./category/development.html">development</a></li>
+                <li><a
+                        href="./category/development-f.html">development, f#</a></li>
+        </ul>
+
+
+</aside>
+
+<!-- Content -->
+<article>
+    <h1>Archives</h1>
+
+    <dl>
+            <dt>Mon 22 June 2020</dt>
+            <dd><a href="./learned-this-week.html">Learned this week</a></dd>
+            <dt>Sat 16 May 2020</dt>
+            <dd><a href="./euler-1-2.html">Euler 1 & 2</a></dd>
+            <dt>Mon 06 April 2020</dt>
+            <dd><a href="./dependency-injection-in-python.html">Dependency Injection in Python</a></dd>
+            <dt>Mon 06 April 2020</dt>
+            <dd><a href="./first-post-getting-set-up-with-pelican.html">First Post - Getting Set Up with Pelican</a></dd>
+    </dl>
+</article>
+
+<!-- Footer -->
+    <footer>
+        <p>
+            Blog powered by <a href="http://getpelican.com/">Pelican</a>,
+            which takes great advantage of <a href="http://python.org">Python</a>.
+            Theme <a href="https://github.com/parbhat/pelican-blue">Pelican-Blue</a> by <a
+                href="https://parbhatpuri.com/">@parbhat</a>.
+        </p>
+    </footer>
+
 
 </body>
 </html>
