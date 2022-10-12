@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Harry Johnson</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/logo.png">
+    <meta name="description" content="my website.">
+    
+    <link rel="preload" href="/assets/css/0.styles.05a22aed.css" as="style"><link rel="preload" href="/assets/js/app.074f48f6.js" as="script"><link rel="preload" href="/assets/js/2.61ff7c13.js" as="script"><link rel="preload" href="/assets/js/20.f42f9984.js" as="script"><link rel="prefetch" href="/assets/js/10.03c2b663.js"><link rel="prefetch" href="/assets/js/11.cfaede5f.js"><link rel="prefetch" href="/assets/js/12.46f0efc4.js"><link rel="prefetch" href="/assets/js/13.6562fb15.js"><link rel="prefetch" href="/assets/js/14.288b0e77.js"><link rel="prefetch" href="/assets/js/15.6aee885d.js"><link rel="prefetch" href="/assets/js/16.a9356e6d.js"><link rel="prefetch" href="/assets/js/17.dc066d6b.js"><link rel="prefetch" href="/assets/js/18.25df3bbd.js"><link rel="prefetch" href="/assets/js/19.da31c28e.js"><link rel="prefetch" href="/assets/js/3.473a1039.js"><link rel="prefetch" href="/assets/js/4.89358ef4.js"><link rel="prefetch" href="/assets/js/5.a1a4167e.js"><link rel="prefetch" href="/assets/js/6.ceb35f91.js"><link rel="prefetch" href="/assets/js/7.074a9b81.js"><link rel="prefetch" href="/assets/js/8.39dc4b86.js"><link rel="prefetch" href="/assets/js/9.3eb21d4e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.05a22aed.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Harry Johnson</span></a> <div class="links"><!----> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="scribbles" class="dropdown-title"><span class="title">scribbles</span> <span class="arrow down"></span></button> <button type="button" aria-label="scribbles" class="mobile-dropdown-title"><span class="title">scribbles</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/scribbles/linux-system-administration.html" class="nav-link">
+  Linux System Administration
+</a></li><li class="dropdown-item"><!----> <a href="/scribbles/python-standard-library.html" class="nav-link">
+  Python Standard Library
+</a></li><li class="dropdown-item"><!----> <a href="/scribbles/tdd-with-pytest.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  TDD with pytest
+</a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="scribbles" class="dropdown-title"><span class="title">scribbles</span> <span class="arrow down"></span></button> <button type="button" aria-label="scribbles" class="mobile-dropdown-title"><span class="title">scribbles</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/scribbles/linux-system-administration.html" class="nav-link">
+  Linux System Administration
+</a></li><li class="dropdown-item"><!----> <a href="/scribbles/python-standard-library.html" class="nav-link">
+  Python Standard Library
+</a></li><li class="dropdown-item"><!----> <a href="/scribbles/tdd-with-pytest.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  TDD with pytest
+</a></li></ul></div></div> <!----></nav>  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><ul><li><a href="#orgffc62f3">TDD with <code>pytest</code></a> <ul><li><a href="#org23165d5">What is TDD</a></li> <li><a href="#org415efd3">Why is TDD worth practicing?</a></li> <li><a href="#org9217a3d">A quick example</a></li> <li><a href="#orga641a8f">Using <code>pytest</code></a> <ul><li><a href="#orga9113c6"><code>assert</code></a></li> <li><a href="#orgd728dc8">Test structure</a></li> <li><a href="#orgd6b9edf">Setup and Teardown</a></li> <li><a href="#orga4ea667">Text Fixtures</a></li></ul></li> <li><a href="#org8f325a5">A proper worked example</a></li> <li><a href="#orgef420e1">Mock Objects</a></li> <li><a href="#org56fc306">Best Practices</a></li></ul></li></ul> <p><a id="orgffc62f3"></a></p> <h1 id="tdd-with-pytest">TDD with <code>pytest</code></h1> <p><a id="org23165d5"></a></p> <h2 id="what-is-tdd">What is TDD</h2> <p>Test Driven Design is a <strong>Design</strong> methodology. I have found it quite easy to think that it's all about testing, but it isn't - it's about design.</p> <p>When using TDD, we write a test before implementing code, but that test is a test for some <strong>behaviour</strong> of the system, which is an expression of the <strong>design</strong>. The difference between behaviour (design), and implementation, is that there are many implementations which satisfy a behaviour. The test ensures that the system behaves the way it is intended, regardless of implementation.</p> <p>The TDD process is often given in terms of 'Red', 'Greed', and 'Refactor'. In the 'Red' phase, we write a test for some behaviour. This test will fail, because the behaviour is not yet implemented, hence the 'Red' phase. We then implement the behaviour, with the minimal code required to make the test pass, which takes us to the 'Green' phase. At this point, we refactor the implementation, the 'Refactor' phase. During the 'Refactor' phase, we might find ourselves making our code more generic, introducing parent classes, abstract classes, and interfaces.</p> <p><a id="org415efd3"></a></p> <h2 id="why-is-tdd-worth-practicing">Why is TDD worth practicing?</h2> <p>In my opinion, the following are the main benefits of TDD:</p> <ul><li>Requirements Clarity: you need to have clear requirements in order to understand what to test.</li> <li>Interface Focussed: writing the test for the behaviour before the implementation of the behaviour pushes you to think about the public interface of the code which implements the behaviour.</li> <li>Safe Refactoring: provided you have tested for the behaviour (the public interface) you want, you can freely change the implementation, safe in the knowledge that if you accidentally change the behaviour, tests will fail and notify you.</li></ul> <p><a id="org9217a3d"></a></p> <h2 id="a-quick-example">A quick example</h2> <p>Here is a quick example of a simple TDD kata, the FizzBuzz kata:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token comment">#!/usr/bin/env python</span>
+
+<span class="token keyword">import</span> pytest
+
+<span class="token keyword">def</span> <span class="token function">multipleOf</span><span class="token punctuation">(</span>multiple<span class="token punctuation">,</span> factor<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>multiple <span class="token operator">%</span> factor<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span>
+
+<span class="token keyword">def</span> <span class="token function">fizzbuzz</span><span class="token punctuation">(</span>multiple<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>multipleOf<span class="token punctuation">(</span>multiple<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token keyword">and</span> <span class="token punctuation">(</span>multipleOf<span class="token punctuation">(</span>multiple<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">return</span> <span class="token string">'FizzBuzz'</span>
+    <span class="token keyword">if</span> multipleOf<span class="token punctuation">(</span>multiple<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">return</span> <span class="token string">'Buzz'</span>
+    <span class="token keyword">if</span> multipleOf<span class="token punctuation">(</span>multiple<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">return</span> <span class="token string">'Fizz'</span>
+
+<span class="token keyword">def</span> <span class="token function">test__assertTrue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">assert</span> <span class="token boolean">True</span> <span class="token comment">#  lol</span>
+
+<span class="token keyword">def</span> <span class="token function">test__returnFizzOnMultipleOfThree</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">assert</span> fizzbuzz<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">'Buzz'</span>
+
+<span class="token keyword">def</span> <span class="token function">test_returnBuzzOnMultipleOfFive</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">assert</span> fizzbuzz<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">'Fizz'</span>
+
+<span class="token keyword">def</span> <span class="token function">test__returnFizzBuzzOnMultipleOfThreeOrFive</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">assert</span> fizzbuzz<span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">'FizzBuzz'</span>
+
+</code></pre></div><p><a id="orga641a8f"></a></p> <h2 id="using-pytest">Using <code>pytest</code></h2> <p><code>pytest</code> is a simple but effective Python unit testing framework.</p> <p><a id="orga9113c6"></a></p> <h3 id="assert"><code>assert</code></h3> <p><code>pytest</code> uses the <code>assert</code> statement to validate conditions in unit tests.</p> <p>According to the Python docs:</p> <blockquote><p>Assert statements are a convenient way to insert debugging assertions into a program … The simple form, <code>assert expression</code>, is equivalent to: <code>if not expression: raise AssertionError</code> … The extended form, <code>assert expression1, expression2</code>, is equivalent to: <code>if not expression1: raise AssertionError(expression2)</code></p></blockquote> <p>Essentially, this statement allows us to raise an error if a condition is not fulfilled. Sounds perfect for unit tests, no?</p> <p><a id="orgd728dc8"></a></p> <h3 id="test-structure">Test structure</h3> <p>Test method names must be prefixed or suffixed with <code>test_</code>, though I quite like to use a double underscore, as I think it improves readability:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">import</span> pytest
+
+<span class="token keyword">def</span> <span class="token function">test__my_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">assert</span> <span class="token boolean">True</span> <span class="token comment">#  lol</span>
+</code></pre></div><p>Class names of classes containing test methods should be prefixed with <code>Test</code>, and have no <code>__init__</code> method:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">import</span> pytest
+
+<span class="token keyword">class</span> <span class="token class-name">TestClass</span><span class="token punctuation">:</span>
+
+    <span class="token comment">#  No __init__!</span>
+
+    <span class="token keyword">def</span> <span class="token function">test__a_method</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">assert</span> <span class="token boolean">True</span> <span class="token comment">#  rofl	</span>
+</code></pre></div><p>While an IDE test runner can usually be configured to run tests with any naming convention, <code>pytest</code>, at least on the command-line, will only pick up your test files automatically if they are also prefixed with <code>test_</code>. If your files are not so prefixed, you can still manually point <code>pytest</code> at them with <code>pytest my_test_file.py</code>.</p> <p><code>pytest</code> allows you to put your tests anywhere, but it's always a good idea to group them logically into classes and modules, in a structure with some relation to your source code.</p> <p><a id="orgd6b9edf"></a></p> <h3 id="setup-and-teardown">Setup and Teardown</h3> <p>Setup and teardown methods allow you to create certain conditions for your tests, and remove them afterwards. <code>pytest</code> has setup and teardown functionality for modules, classes, methods, and functions, which are simply the name of the code construct prefixed with the method type:</p> <ul><li>Module -&gt; <code>setup_module(module):</code></li> <li>Class -&gt; <code>setup_class(cls):</code></li> <li>etc…</li></ul> <p>The <code>setup_x</code> method is called once before, and the <code>teardown_x</code> after each matching type of construct, and they are called in, roughly, LIFO order: a <code>setup_module(module):</code> function is called first, and before any other <code>setup_</code> call, and <code>teardown_module(module):</code> is called <strong>after</strong> any other <code>teardown_</code> calls. Whether the setup and teardown for function or class is called next depends on what order the tests are encountered in the file. If a <code>Test</code> class is present, <code>setup_class(cls):</code> is called, then <code>setup_method(self, method):</code>.</p> <p>When using <code>Test</code> classes, the <code>setup_class(cls):</code> and <code>teardown_class(cls):</code> methods are.. class methods (funny that), so they must be annotated with <code>@classmethod</code>, and be passed <code>cls</code>, not <code>self</code>.</p> <p>Let's see what this looks like in practice:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token comment">#!/usr/bin/env python</span>
+<span class="token keyword">import</span> pytest
+
+<span class="token keyword">def</span> <span class="token function">setup_module</span><span class="token punctuation">(</span>module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nSetting up module'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">teardown_module</span><span class="token punctuation">(</span>module<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTearing down module'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">class</span> <span class="token class-name">TestClass</span><span class="token punctuation">:</span>
+
+    @<span class="token builtin">classmethod</span>
+    <span class="token keyword">def</span> <span class="token function">setup_class</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nSetting up class'</span><span class="token punctuation">)</span>
+
+    @<span class="token builtin">classmethod</span>
+    <span class="token keyword">def</span> <span class="token function">teardown_class</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTearing down class'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">setup_method</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> method<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nSetting up method'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">teardown_method</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> method<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTearing down method'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">test__my_method</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\n**Executing my_method'</span><span class="token punctuation">)</span>
+	<span class="token keyword">assert</span> <span class="token boolean">True</span>
+
+<span class="token keyword">def</span> <span class="token function">setup_function</span><span class="token punctuation">(</span>function<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nSetting up function'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">teardown_function</span><span class="token punctuation">(</span>function<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTearing down function'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">test__my_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\n**Executing my_function'</span><span class="token punctuation">)</span>
+</code></pre></div><p><a id="orga4ea667"></a></p> <h3 id="text-fixtures">Text Fixtures</h3> <p>Test fixtures allow you to further customise the environment in which your tests run. Text fixtures are usually functions which either provide some functionality or data to your test, to emulate the behaviour of a dependency, for example.</p> <p><code>pytest</code> provides a decorator <code>pytest.fixture</code> which is used to decorate fixture functions. <code>pytest</code> is very flexible, and allows specification of which fixtures are to be run in conjunction with which tests. <code>pytest</code> provides an <code>autouse</code> parameter, which tells <code>pytest</code> to execute that fixture for <strong>every</strong> test.</p> <p>Lets start building an example:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">import</span> pytest
+<span class="token keyword">from</span> pytest <span class="token keyword">import</span> fixture
+
+@fixture<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">fixture_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI help test methods do their jobs!'</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">test__something</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTesting something...'</span><span class="token punctuation">)</span>
+    <span class="token keyword">assert</span> <span class="token boolean">True</span>
+
+<span class="token keyword">def</span> <span class="token function">test__something_else</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTesting something ELSE'</span><span class="token punctuation">)</span>
+    <span class="token keyword">assert</span> <span class="token boolean">True</span>
+</code></pre></div><p>Running that with <code>pytest -v -s</code> (<code>s</code> tells <code>pytest</code> to pass through the results <code>print()</code> calls to <code>stdout</code>) will only print the strings in the <code>test__</code> methods, because even though we have specified the fixture with <code>@fixture()</code> we have not yet integrated the <code>fixture_function()</code> with the test functions.</p> <p>There are two ways to integrate the fixture with our <code>test__</code> functions:</p> <ol><li>Supply the fixture as a parameter to the <code>test__</code> function</li> <li>Use the @mark.usefixtures('fixture<sub>name</sub>') decorator</li></ol> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">import</span> pytest
+<span class="token keyword">from</span> pytest <span class="token keyword">import</span> fixture<span class="token punctuation">,</span> mark
+
+@fixture<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">fixture_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI help test methods do their jobs!'</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">test__something</span><span class="token punctuation">(</span>fixture_function<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTesting something...'</span><span class="token punctuation">)</span>
+    <span class="token keyword">assert</span> <span class="token boolean">True</span>
+
+@mark<span class="token punctuation">.</span>usefixtures<span class="token punctuation">(</span><span class="token string">'fixture_function'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">test__something_else</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTesting something ELSE'</span><span class="token punctuation">)</span>
+    <span class="token keyword">assert</span> <span class="token boolean">True</span>
+</code></pre></div><p>Now running that with the same <code>pytest</code> arguments as before should print the <code>fixture_function</code> message before each of the <code>test__</code> function messages.</p> <p>Now let's add another fixture, which is called for every <code>test__</code> function, using the <code>autouse</code> parameter to <code>@fixture()</code>:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">import</span> pytest
+<span class="token keyword">from</span> pytest <span class="token keyword">import</span> fixture<span class="token punctuation">,</span> mark
+
+@fixture<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">fixture_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI help SOME methods do their jobs!'</span><span class="token punctuation">)</span>
+
+@fixture<span class="token punctuation">(</span>autouse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">used_automatically</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI help ALL test methods do their jobs!'</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">test__something</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTesting something...'</span><span class="token punctuation">)</span>
+    <span class="token keyword">assert</span> <span class="token boolean">True</span>
+
+@mark<span class="token punctuation">.</span>usefixtures<span class="token punctuation">(</span><span class="token string">'fixture_function'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">test__something_else</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTesting something ELSE'</span><span class="token punctuation">)</span>
+    <span class="token keyword">assert</span> <span class="token boolean">True</span>
+</code></pre></div><p>Running this, you should see that the message from <code>fixture_function()</code> is only displayed for <code>test__something_else()</code>, while the message from <code>used_automatically()</code> displays for both tests.</p> <p><code>pytest</code> fixtures also provide functionality for them to clean up after they leave the scope. This can be done in one of two ways:</p> <ol><li>The <code>yield</code> keyword</li> <li>the <code>request.addfinalalizer</code> method</li></ol> <p>The <code>yield</code> keyword, use it in your test fixture in place of a return statement. Whatever comes after the <code>yield</code> keyword will be executed after the test has completed.</p> <p>The <code>request.addfinalizer</code> method is more complex, but more flexible. It allows the test method to specify any number of functions to be called after the test.</p> <p>Let's build those into the example:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">import</span> pytest
+<span class="token keyword">from</span> pytest <span class="token keyword">import</span> fixture<span class="token punctuation">,</span> mark
+
+@fixture<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">fixture_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI help SOME methods do their jobs!'</span><span class="token punctuation">)</span>
+    <span class="token keyword">yield</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI clean up using YIELD'</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">finalize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI clean up using REQUEST.ADDFINALIZER'</span><span class="token punctuation">)</span>
+
+
+@fixture<span class="token punctuation">(</span>autouse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">used_automatically</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI help ALL test methods do their jobs!'</span><span class="token punctuation">)</span>
+    request<span class="token punctuation">.</span>addfinalizer<span class="token punctuation">(</span>finalize<span class="token punctuation">)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">test__something</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTesting something...'</span><span class="token punctuation">)</span>
+    <span class="token keyword">assert</span> <span class="token boolean">True</span>
+
+@mark<span class="token punctuation">.</span>usefixtures<span class="token punctuation">(</span><span class="token string">'fixture_function'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">test__something_else</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTesting something ELSE'</span><span class="token punctuation">)</span>
+    <span class="token keyword">assert</span> <span class="token boolean">True</span>
+
+</code></pre></div><p>Here, our <code>fixture_function</code> uses the <code>yield</code> keyword to emit it's second <code>print()</code> output after the <code>test__something_else</code> test function.</p> <p>We have also defined another function <code>finalize</code>, which is used by the <code>request.addfinalizer</code> in both <code>test__something</code> and <code>test__something_else</code> <strong>automatically</strong>, because we are still using the <code>@fixture(autouse=True)</code> decorator on the <code>used_automatically</code>. So you should see the output of <code>finalize</code>'s <code>print()</code> after both tests have completed.</p> <ol><li><p>Fixture Scope</p> <p>Fixture scope is (surprise surprise), the scope of the fixture - the allowed domain of its operation. There are four fixture scopes:</p> <ol><li>Function - fixture scope is per test function, it is run once per test function</li> <li>Class - fixture scope is per class</li> <li>Module - run once per module</li> <li>Session - run <strong>when <code>pytest</code> starts</strong></li></ol> <p>Note that the scopes are not the same as the four types of setup/teardown method.</p> <p>Now let's work these into our example:</p> <div class="language-python extra-class"><pre class="language-python"><code> <span class="token keyword">import</span> pytest
+ <span class="token keyword">from</span> pytest <span class="token keyword">import</span> fixture<span class="token punctuation">,</span> mark
+
+<span class="token keyword">def</span> <span class="token function">finalize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI clean up using REQUEST.ADDFINALIZER'</span><span class="token punctuation">)</span>
+
+
+@fixture<span class="token punctuation">(</span>scope<span class="token operator">=</span><span class="token string">'function'</span><span class="token punctuation">,</span> autouse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">fixture_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI help FUNCTIONS do their jobs!'</span><span class="token punctuation">)</span>
+    <span class="token keyword">yield</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI clean up using YIELD'</span><span class="token punctuation">)</span>
+
+
+@fixture<span class="token punctuation">(</span>scope<span class="token operator">=</span><span class="token string">'class'</span><span class="token punctuation">,</span> autouse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">fixture_class</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI help CLASSES do their jobs!'</span><span class="token punctuation">)</span>
+    <span class="token keyword">yield</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI clean up using YIELD'</span><span class="token punctuation">)</span>
+
+
+@fixture<span class="token punctuation">(</span>scope<span class="token operator">=</span><span class="token string">'module'</span><span class="token punctuation">,</span> autouse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">fixture_module</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI help MODULES do their jobs!'</span><span class="token punctuation">)</span>
+    request<span class="token punctuation">.</span>addfinalizer<span class="token punctuation">(</span>finalize<span class="token punctuation">)</span>
+
+
+@fixture<span class="token punctuation">(</span>scope<span class="token operator">=</span><span class="token string">'session'</span><span class="token punctuation">,</span> autouse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">fixture_session</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nI help SESSIONS do their jobs!'</span><span class="token punctuation">)</span>
+    request<span class="token punctuation">.</span>addfinalizer<span class="token punctuation">(</span>finalize<span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">TestClass</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">test__something</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTesting something...'</span><span class="token punctuation">)</span>
+	<span class="token keyword">assert</span> <span class="token boolean">True</span>
+
+    <span class="token keyword">def</span> <span class="token function">test__something_else</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTesting something ELSE'</span><span class="token punctuation">)</span>
+	<span class="token keyword">assert</span> <span class="token boolean">True</span>
+</code></pre></div><p>Several things have changed here:</p> <ol><li>All test methods are inside a <code>Test</code> class - this is because there is no difference between function scope and method scope.</li> <li>All the fixtures use the <code>autouse=True</code> parameter - this is to make the example a bit simpler, so the code can be more easily correlated with <code>pytest</code> output.</li> <li>The session and module scoped fixtures use <code>request.addfinalizer</code>, and function and class scoped fixtures use <code>yield</code>. This is to show the difference.</li></ol> <p>If you study the <code>pytest</code> output, you should see that the session fixture is called first, then the module fixture, then the class fixture. The function fixture is then called once per test function, and its cleanup is run after each test function. Then, the class cleanup is called, then the module cleanup, then the session cleanup. Somewhat like an onion.</p></li> <li><p>Data Providers</p> <p>Test fixtures can operate as data providers for test methods. This means that the fixture can supply arguments to the method, to vary the execution path in the test method.</p> <p><code>pytest.fixture</code> can be supplied with a <code>params</code> parameter, each of whose items can be used in the test method the fixture is applied to:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">import</span> pytest
+<span class="token keyword">from</span> pytest <span class="token keyword">import</span> fixture
+
+@fixture<span class="token punctuation">(</span>params<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">my_fixture</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> request<span class="token punctuation">.</span>param
+
+
+<span class="token keyword">def</span> <span class="token function">test__a_test</span><span class="token punctuation">(</span>my_fixture<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'\nTesting something with param {}'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>my_fixture<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>You should see that for each parameter defined in the <code>@fixture</code> decorator, the test method output is modified by that parameter. You can do more complex things too:</p> <div class="language-python extra-class"><pre class="language-python"><code> <span class="token keyword">import</span> pytest
+ <span class="token keyword">from</span> pytest <span class="token keyword">import</span> fixture
+
+ @fixture<span class="token punctuation">(</span>params<span class="token operator">=</span><span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">.</span>lower<span class="token punctuation">,</span> <span class="token builtin">str</span><span class="token punctuation">.</span>upper<span class="token punctuation">,</span> <span class="token builtin">str</span><span class="token punctuation">.</span>capitalize<span class="token punctuation">]</span><span class="token punctuation">)</span>
+ <span class="token keyword">def</span> <span class="token function">my_fixture</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+     <span class="token keyword">return</span> request<span class="token punctuation">.</span>param
+
+
+<span class="token keyword">def</span> <span class="token function">test__a_test</span><span class="token punctuation">(</span>my_fixture<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>my_fixture<span class="token punctuation">(</span><span class="token string">'\nTesting something'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>In this case, each function in the <code>params</code> list is applied to the test output.</p> <p>There is another, more complex and flexible way to supply arguments to test methods: the <code>mark.parametrize()</code> decorator. Here is a quick example from the docs to show how it works:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">import</span> pytest
+<span class="token keyword">from</span> pytest <span class="token keyword">import</span> mark
+
+
+@mark<span class="token punctuation">.</span>parametrize<span class="token punctuation">(</span><span class="token string">&quot;test_input,expected&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token string">&quot;3+5&quot;</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">&quot;2+4&quot;</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">&quot;6*9&quot;</span><span class="token punctuation">,</span> <span class="token number">42</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">test_eval</span><span class="token punctuation">(</span>test_input<span class="token punctuation">,</span> expected<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">assert</span> <span class="token builtin">eval</span><span class="token punctuation">(</span>test_input<span class="token punctuation">)</span> <span class="token operator">==</span> expected
+</code></pre></div><p>I prefer to use the <code>@fixture(params=[])</code> decorator to create specific conditions for a test method by manipulating the params before making them available to the test method, and the <code>mark.parametrize</code> decorator to specify the possible cases a generic function might need to handle.</p></li> <li><p>Useful tidbits</p> <p>Comparing <code>float</code> values can be difficult, as they are stored internally as binary fractions. This means that <code>0.1 + 0.2</code> doesn't have the answer you might expect:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">0.1</span><span class="token operator">+</span><span class="token number">0.2</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0.3</span><span class="token punctuation">)</span> <span class="token comment">#  False!</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token number">0.1</span><span class="token operator">+</span><span class="token number">0.2</span><span class="token punctuation">)</span> <span class="token comment">#  0.30000000000000004</span>
+</code></pre></div><p>You can test floating point arithmethic using <code>pytest@</code>'s <code>approx</code> function:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">import</span> pytest
+<span class="token keyword">from</span> pytest <span class="token keyword">import</span> approx
+
+<span class="token keyword">def</span> <span class="token function">test__float</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token number">0.1</span> <span class="token operator">+</span> <span class="token number">0.2</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0.3</span> <span class="token comment"># Fail</span>
+
+<span class="token keyword">def</span> <span class="token function">test__float</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token number">0.1</span> <span class="token operator">+</span> <span class="token number">0.2</span><span class="token punctuation">)</span> <span class="token operator">==</span> approx<span class="token punctuation">(</span><span class="token number">0.3</span><span class="token punctuation">)</span> <span class="token comment"># pass	 </span>
+
+</code></pre></div><p>Sometimes you want to make sure a particular exception is thrown. <code>pytest</code> provides a context manager for that case: <code>raises()</code>. Let's work it into the previous example:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">import</span> pytest
+<span class="token keyword">from</span> pytest <span class="token keyword">import</span> approx<span class="token punctuation">,</span> raises
+
+<span class="token keyword">def</span> <span class="token function">test__float</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">with</span> raises<span class="token punctuation">(</span>AssertionError<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token number">0.1</span> <span class="token operator">+</span> <span class="token number">0.2</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0.3</span> <span class="token comment"># pass!</span>
+
+<span class="token keyword">def</span> <span class="token function">test__float</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">assert</span> <span class="token punctuation">(</span><span class="token number">0.1</span> <span class="token operator">+</span> <span class="token number">0.2</span><span class="token punctuation">)</span> <span class="token operator">==</span> approx<span class="token punctuation">(</span><span class="token number">0.3</span><span class="token punctuation">)</span> <span class="token comment"># pass</span>
+</code></pre></div><p>If you're running <code>pytest</code> from the command-line, there are some useful arguments to know:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>pytest
+       -v <span class="token comment"># Verbose mode</span>
+       -q <span class="token comment"># Quiet mode (suppress output)</span>
+       -s <span class="token comment"># Pass test output to stdout, instead of capturing</span>
+       --ignore <span class="token environment constant">PATH</span> <span class="token comment"># Ignore specified PATH when discovering tests</span>
+       --maxfail NUMBER <span class="token comment"># Stop after NUMBER failed tests</span>
+</code></pre></div></li></ol> <p><a id="org8f325a5"></a></p> <h2 id="a-proper-worked-example">A proper worked example</h2> <p>In this example, I'll work through modelling a supermarket checkout, with a Checkout, Items, prices, price calculation, and discounts.</p> <p>First, the source code, though of course, it was written according to Red-&gt;Green-&gt;Refactor:</p> <div class="language-python extra-class"><pre class="language-python"><code>   <span class="token comment">#!/usr/bin/env python</span>
+
+<span class="token keyword">from</span> typing <span class="token keyword">import</span> List<span class="token punctuation">,</span> Dict
+
+<span class="token keyword">class</span> <span class="token class-name">Discount</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> number<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">,</span> factor<span class="token punctuation">:</span> <span class="token builtin">float</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+	self<span class="token punctuation">.</span>number <span class="token operator">=</span> number
+	self<span class="token punctuation">.</span>factor <span class="token operator">=</span> factor
+
+
+DiscountTable <span class="token operator">=</span> Dict<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">,</span> Discount<span class="token punctuation">]</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Item</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> price<span class="token punctuation">:</span> <span class="token builtin">float</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+	self<span class="token punctuation">.</span>price <span class="token operator">=</span> price
+	self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+
+
+Basket <span class="token operator">=</span> List<span class="token punctuation">[</span>Item<span class="token punctuation">]</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Checkout</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> discount_table<span class="token punctuation">:</span> DiscountTable<span class="token punctuation">,</span> basket<span class="token punctuation">:</span> Basket<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+	self<span class="token punctuation">.</span>discount_table <span class="token operator">=</span> discount_table
+	self<span class="token punctuation">.</span>basket <span class="token operator">=</span> basket
+
+    <span class="token keyword">def</span> <span class="token function">_apply_discounts</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+	discounted_basket <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+	discountable_product_names <span class="token operator">=</span> self<span class="token punctuation">.</span>discount_table<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token keyword">for</span> product_name <span class="token keyword">in</span> discountable_product_names<span class="token punctuation">:</span>
+	    product_discount <span class="token operator">=</span> self<span class="token punctuation">.</span>discount_table<span class="token punctuation">[</span>product_name<span class="token punctuation">]</span>
+	    items <span class="token operator">=</span> <span class="token punctuation">[</span>item <span class="token keyword">for</span> item <span class="token keyword">in</span> self<span class="token punctuation">.</span>basket <span class="token keyword">if</span> item<span class="token punctuation">.</span>name <span class="token operator">==</span> product_name<span class="token punctuation">]</span>
+	    <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>items<span class="token punctuation">)</span> <span class="token operator">&gt;=</span> product_discount<span class="token punctuation">.</span>number<span class="token punctuation">:</span>
+		<span class="token keyword">for</span> item <span class="token keyword">in</span> items<span class="token punctuation">:</span>
+		    discounted_basket<span class="token punctuation">.</span>append<span class="token punctuation">(</span>
+			Item<span class="token punctuation">(</span>product_discount<span class="token punctuation">.</span>factor <span class="token operator">*</span> item<span class="token punctuation">.</span>price<span class="token punctuation">,</span> product_name<span class="token punctuation">)</span>
+		    <span class="token punctuation">)</span>
+	    <span class="token keyword">else</span><span class="token punctuation">:</span>
+		discounted_basket<span class="token punctuation">.</span>extend<span class="token punctuation">(</span>items<span class="token punctuation">)</span>
+	self<span class="token punctuation">.</span>basket <span class="token operator">=</span> discounted_basket
+
+    <span class="token keyword">def</span> <span class="token function">get_total</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> eligible_for_discount<span class="token punctuation">:</span> <span class="token builtin">bool</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">float</span><span class="token punctuation">:</span>
+	<span class="token keyword">if</span> eligible_for_discount<span class="token punctuation">:</span>
+	    self<span class="token punctuation">.</span>_apply_discounts<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+	<span class="token keyword">return</span> <span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">[</span>item<span class="token punctuation">.</span>price <span class="token keyword">for</span> item <span class="token keyword">in</span> self<span class="token punctuation">.</span>basket<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>And the tests:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token comment">#!/usr/bin/env python</span>
+<span class="token keyword">from</span> typing <span class="token keyword">import</span> Dict
+
+<span class="token keyword">from</span> pytest <span class="token keyword">import</span> mark
+
+<span class="token keyword">from</span> <span class="token punctuation">.</span>Checkout <span class="token keyword">import</span> Checkout<span class="token punctuation">,</span> Item<span class="token punctuation">,</span> Discount<span class="token punctuation">,</span> DiscountTable
+
+<span class="token comment"># Imagine I am a properly implemented product-discount subsystem..</span>
+discount_table <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'bread'</span><span class="token punctuation">:</span> Discount<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token string">'milk'</span><span class="token punctuation">:</span> Discount<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0.25</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token string">'cheese'</span><span class="token punctuation">:</span> Discount<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">0.6</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">def</span> <span class="token function">test__create_discount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    discount <span class="token operator">=</span> Discount<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">assert</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>discount<span class="token punctuation">,</span> Discount<span class="token punctuation">)</span>
+    <span class="token keyword">assert</span> discount<span class="token punctuation">.</span>number <span class="token operator">==</span> <span class="token number">2</span>
+    <span class="token keyword">assert</span> discount<span class="token punctuation">.</span>factor <span class="token operator">==</span> <span class="token number">0.5</span>
+
+
+<span class="token keyword">def</span> <span class="token function">test__create_item</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    item <span class="token operator">=</span> Item<span class="token punctuation">(</span><span class="token number">5.0</span><span class="token punctuation">,</span> <span class="token string">'Ham'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">assert</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>item<span class="token punctuation">,</span> Item<span class="token punctuation">)</span>
+    <span class="token keyword">assert</span> item<span class="token punctuation">.</span>price <span class="token operator">==</span> <span class="token number">5.0</span>
+    <span class="token keyword">assert</span> item<span class="token punctuation">.</span>name <span class="token operator">==</span> <span class="token string">'Ham'</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">TestCheckout</span><span class="token punctuation">:</span>
+
+    @mark<span class="token punctuation">.</span>parametrize<span class="token punctuation">(</span>
+	<span class="token string">'basket, num_items_in_basket'</span><span class="token punctuation">,</span>
+	<span class="token punctuation">[</span>
+	    <span class="token punctuation">[</span><span class="token punctuation">[</span>Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'bread'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'bread'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+	    <span class="token punctuation">[</span><span class="token punctuation">[</span>Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'bread'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'bread'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'bread'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
+	<span class="token punctuation">]</span>
+    <span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">test__createCheckout</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> basket<span class="token punctuation">,</span> num_items_in_basket<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	checkout <span class="token operator">=</span> Checkout<span class="token punctuation">(</span>discount_table<span class="token punctuation">,</span> basket<span class="token punctuation">)</span>
+
+	<span class="token keyword">assert</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>checkout<span class="token punctuation">,</span> Checkout<span class="token punctuation">)</span>
+	<span class="token keyword">assert</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>checkout<span class="token punctuation">.</span>discount_table<span class="token punctuation">,</span> DiscountTable<span class="token punctuation">)</span>
+	<span class="token keyword">assert</span> <span class="token builtin">len</span><span class="token punctuation">(</span>checkout<span class="token punctuation">.</span>basket<span class="token punctuation">)</span> <span class="token operator">==</span> num_items_in_basket
+
+    @mark<span class="token punctuation">.</span>parametrize<span class="token punctuation">(</span>
+	<span class="token string">'basket, total, eligible_for_discount'</span><span class="token punctuation">,</span>
+	<span class="token punctuation">[</span>
+	    <span class="token punctuation">[</span><span class="token punctuation">[</span>Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'bread'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'bread'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+	    <span class="token punctuation">[</span><span class="token punctuation">[</span>Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'bread'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'bread'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'bread'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+	    <span class="token punctuation">[</span><span class="token punctuation">[</span>Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'bread'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'bread'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'bread'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+	    <span class="token punctuation">[</span><span class="token punctuation">[</span>Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'milk'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Item<span class="token punctuation">(</span><span class="token number">5.0</span><span class="token punctuation">,</span> <span class="token string">'bread'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Item<span class="token punctuation">(</span><span class="token number">3.0</span><span class="token punctuation">,</span> <span class="token string">'cheese'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+	    <span class="token punctuation">[</span><span class="token punctuation">[</span>Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'milk'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'milk'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'milk'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+	    <span class="token punctuation">[</span><span class="token punctuation">[</span>Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'milk'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'milk'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Item<span class="token punctuation">(</span><span class="token number">2.0</span><span class="token punctuation">,</span> <span class="token string">'milk'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">1.5</span><span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">]</span>
+	<span class="token punctuation">]</span>
+    <span class="token punctuation">)</span>
+    <span class="token keyword">def</span> <span class="token function">test__get_total</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> basket<span class="token punctuation">,</span> total<span class="token punctuation">,</span> eligible_for_discount<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	checkout <span class="token operator">=</span> Checkout<span class="token punctuation">(</span>discount_table<span class="token punctuation">,</span> basket<span class="token punctuation">)</span>
+	checkout_total <span class="token operator">=</span> checkout<span class="token punctuation">.</span>get_total<span class="token punctuation">(</span>eligible_for_discount<span class="token punctuation">)</span>
+
+	<span class="token keyword">assert</span> total <span class="token operator">==</span> checkout_total
+
+</code></pre></div><p>I could probably have made more use of the <code>@fixture</code> decorator, to dry up some of those <code>checkout = Checkout..</code>.</p> <p><a id="orgef420e1"></a></p> <h2 id="mock-objects">Mock Objects</h2> <p>Mock objects come by various names: dummy, stub, mock, etc. These are sometimes collectively called test doubles, as their purpose is to mimic the dependencies of the code under test, so as to avoid having to initialise the entire stack, and enable us to control the environment of the test, so as to systematically verify its behaviour.</p> <p>Pythons standard <code>unittest</code> library provides the extremely useful <code>MagicMock</code> class. <code>MagicMock</code> (and its parent, <code>Mock</code>) allows various keyword arguments to be specified to its constructor, which control aspects of its behaviour:</p> <ul><li><code>spec=SomeClass</code>: specifies that the mock implements <code>SomeClass</code></li> <li><code>side_effect=some_func</code>: allows <code>some_func</code> to be called when the mock is called</li> <li><code>return_value='some value'</code>: allows some value to be returned when the mock is called</li></ul> <p><code>pytest</code> also provides the <code>monkeypatch</code> fixture, which allows us to dynamically change the functionality of code.</p> <p>The following shows how to use <code>MagicMock</code> and <code>monkeypatch</code>:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token comment">#!/usr/bin/env python</span>
+<span class="token keyword">from</span> typing <span class="token keyword">import</span> Any
+<span class="token keyword">from</span> unittest<span class="token punctuation">.</span>mock <span class="token keyword">import</span> MagicMock
+
+
+<span class="token keyword">class</span> <span class="token class-name">ApiLogger</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> logger<span class="token punctuation">:</span> Any<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+	self<span class="token punctuation">.</span>logger <span class="token operator">=</span> logger
+
+    <span class="token keyword">def</span> <span class="token function">log</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> message<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">str</span><span class="token punctuation">:</span>
+	<span class="token keyword">return</span> self<span class="token punctuation">.</span>logger<span class="token punctuation">.</span>log<span class="token punctuation">(</span>message<span class="token punctuation">)</span>
+
+
+
+<span class="token keyword">def</span> <span class="token function">test__create_logger</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    logger <span class="token operator">=</span> ApiLogger<span class="token punctuation">(</span>MagicMock<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">assert</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>logger<span class="token punctuation">,</span> ApiLogger<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">test__log</span><span class="token punctuation">(</span>monkeypatch<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    mock_logger <span class="token operator">=</span> MagicMock<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    mock_logger<span class="token punctuation">.</span>log <span class="token operator">=</span> MagicMock<span class="token punctuation">(</span>return_value<span class="token operator">=</span><span class="token string">'MOCKED'</span><span class="token punctuation">)</span>
+
+    api_logger <span class="token operator">=</span> ApiLogger<span class="token punctuation">(</span>mock_logger<span class="token punctuation">)</span>
+    <span class="token keyword">assert</span> api_logger<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'log message'</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">'MOCKED'</span>
+
+    <span class="token keyword">def</span> <span class="token function">get_foo</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> some_arg<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">str</span><span class="token punctuation">:</span>
+	<span class="token keyword">return</span> <span class="token string">'foo'</span>
+
+    api_logger <span class="token operator">=</span> ApiLogger<span class="token punctuation">(</span>mock_logger<span class="token punctuation">)</span>
+    monkeypatch<span class="token punctuation">.</span><span class="token builtin">setattr</span><span class="token punctuation">(</span>ApiLogger<span class="token punctuation">,</span> <span class="token string">'log'</span><span class="token punctuation">,</span> get_foo<span class="token punctuation">)</span>
+    <span class="token keyword">assert</span> api_logger<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'anything'</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">'foo'</span>
+
+</code></pre></div><p><a id="org56fc306"></a></p> <h2 id="best-practices">Best Practices</h2> <p>Always make implement the simplest test cases possible. This forces you to implement simple code to satisfy the test case, and ensures that complexity increases incrementally, with each step having been thought through in advance. If your test cases are very complex, that is a sign that the design is not sufficiently decoupled, as complex text cases are indicative of complex interfaces, and it is often the case that complex interfaces mean insufficiently decoupled code. Usually subjecting the code to some interface segregation helps with this.</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">7/19/2020, 8:26:48 PM</span></div></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.074f48f6.js" defer></script><script src="/assets/js/2.61ff7c13.js" defer></script><script src="/assets/js/20.f42f9984.js" defer></script>
+  </body>
+</html>
